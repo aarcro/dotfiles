@@ -1,3 +1,9 @@
+" Automatic reloading of .vimrc
+autocmd! bufwritepost .vimrc source %
+
+" Load pathogen - package mangement for vim
+call pathogen#infect()
+
 "The default leader is '\', but many people prefer ',' as it's in a standard location
 let mapleader = ','
 
@@ -39,9 +45,29 @@ map <C-l> :tabn<CR>
 imap <C-h> <esc>:tabp<CR>
 imap <C-l> <esc>:tabn<CR>
 map <C-n> :tabnew 
+map <leader>n :tabnew<CR>:CtrlP<CR>
+map <leader>o :CtrlP<CR>
+
 
 :function! Fixquote()
 :% s/“/\&ldquo;/g
 :% s/”/\&rdquo;/g
 :% s/’/\&rsquo;/g
 :endfunction
+
+" Sort a paragraph (like a block of imports)
+map <leader>s vip:sort<cr>
+
+" ctrlp stuff
+let g:ctrlp_max_height = 30
+let g:ctrlp_working_path_mode = 'ra'
+
+" Common files to ignore
+set wildignore+=*.pyc
+set wildignore+=*_build/*
+set wildignore+=*/coverage/*
+set wildignore+=*/migrations/*
+
+" jedi settings
+" leader-n is new a ctrlp tab, lets use leader-a for all usages
+let g:jedi#usages_command = "<leader>a"

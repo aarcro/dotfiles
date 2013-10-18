@@ -1,0 +1,9 @@
+[submodule "home/.vim/bundle/jedi-vim"]
+	path = home/.vim/bundle/jedi-vim
+	url = https://github.com/davidhalter/jedi-vim
+[submodule "home/.vim/bundle/supertab"]
+	path = home/.vim/bundle/supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule "home/.vim/bundle/ctrlp"]
+	path = home/.vim/bundle/ctrlp
+	url = https://github.com/kien/ctrlp.vim.git
