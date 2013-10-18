@@ -102,12 +102,14 @@ fi
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
     . ~/bin/django_bash_completion
+    . ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
     echo "Extended Complete enabled"
 fi
 #Or on Solaris
 if [ -f /opt/csw/etc/bash_completion ]; then
     . /opt/csw/etc/bash_completion
     . ~/bin/django_bash_completion
+    . ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
     echo "Extended Complete enabled"
 fi
 
@@ -150,6 +152,5 @@ fi
 if [ -f $HOME/.pythonrc.py ]; then
     export PYTHONSTARTUP=$HOME/.pythonrc.py
 fi
-
 
 alias homeshick="source $HOME/.homesick/repos/homeshick/bin/homeshick.sh"
