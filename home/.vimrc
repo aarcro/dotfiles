@@ -29,6 +29,8 @@ set showmode
 " Only in python files
 au BufRead,BufNewFile *.py,*.pyw highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 au BufRead,BufNewFile *.py,*.pyw match OverLength /\%80v.\+/
+" Add breakpoints
+map <Leader>b Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>
 
 " Making it so ; works like : for commands. Saves typing and eliminates :W style typos due to lazy holding shift.
 nnoremap ; :
@@ -66,8 +68,10 @@ let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
+" I don't want to see all the migrations
 set wildignore+=*/migrations/*
 
 " jedi settings
+" If you have errors about jedi at startup: pip install jedi
 " leader-n is new a ctrlp tab, lets use leader-a for all usages
 let g:jedi#usages_command = "<leader>a"
