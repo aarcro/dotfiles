@@ -50,6 +50,7 @@ map <C-n> :tabnew
 map <leader>n :tabnew<CR>:CtrlP<CR>
 map <leader>o :CtrlP<CR>
 
+set showtabline=2
 
 :function! Fixquote()
 :% s/“/\&ldquo;/g
