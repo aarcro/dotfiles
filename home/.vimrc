@@ -32,6 +32,9 @@ au BufRead,BufNewFile *.py,*.pyw match OverLength /\%80v.\+/
 " Add breakpoints
 map <Leader>b Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>
 
+" better for html
+au BufRead,BufNewFile *.html,*.js set ts=2|set sw=2
+
 " Making it so ; works like : for commands. Saves typing and eliminates :W style typos due to lazy holding shift.
 nnoremap ; :
 
