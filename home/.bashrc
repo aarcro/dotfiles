@@ -90,12 +90,11 @@ if [ -x /usr/bin/dircolors ]; then
     #alias grep='grep --color=auto'
     #alias fgrep='fgrep --color=auto'
     #alias egrep='egrep --color=auto'
+else
+    # Probably Mac, this will help
+    export CLICOLOR=1
+    export LSCOLORS=gxFxCxDxBxegedabagacad
 fi
-
-# some more ls aliases
-#alias ll='ls -l'
-#alias la='ls -A'
-#alias l='ls -CF'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -112,6 +111,15 @@ if [ -f /opt/csw/etc/bash_completion ]; then
     . ~/bin/django_bash_completion
     . ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
     echo "Extended Complete enabled"
+fi
+# Or Mac (with homebrew)
+if which -s brew; then
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+    . ~/bin/django_bash_completion
+    . ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
+    echo "Extended Complete enabled"
+  fi
 fi
 
 alias here='cd `pwd -P`'
@@ -155,3 +163,4 @@ if [ -f $HOME/.pythonrc.py ]; then
 fi
 
 alias homeshick="source $HOME/.homesick/repos/homeshick/bin/homeshick.sh"
+complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
