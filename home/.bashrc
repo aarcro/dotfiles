@@ -144,14 +144,41 @@ function py_find {
     type_find py $*
 }
 
-if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+#Virtenv wrapper
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+
+if [ -d /opt/virtual_envs ]; then
+    export WORKON_HOME=/opt/virtual_envs
+else
     export WORKON_HOME=~/virtual_envs
-    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+fi
+
+if [ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]; then
+    source /usr/local/bin/virtualenvwrapper_lazy.sh
+elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
+
+alias newproject="/bin/bash ~/newproject.sh"
 
 if [ -f $HOME/.pythonrc.py ]; then
     export PYTHONSTARTUP=$HOME/.pythonrc.py
 fi
 
+# pip bash completion start
+_pip_completion()
+{
+    COMPREPLY=( $( COMP_WORDS="${COMP_WORDS[*]}" \
+                   COMP_CWORD=$COMP_CWORD \
+                   PIP_AUTO_COMPLETE=1 $1 ) )
+}
+complete -o default -F _pip_completion pip
+# pip bash completion end
+
 alias homeshick="source $HOME/.homesick/repos/homeshick/bin/homeshick.sh"
+alias start_gunicorn="if [[ -x ./manage.py ]] ; then ./manage.py run_gunicorn localhost:8080 --timeout 3600 --graceful-timeout=3600 --pid=../../tmp/gunicorn.pid ; else echo 'No manage.py fournd' ; fi"
+
+if [ -f ~/.bashrc_local ]; then
+    #Here's a chance to do crazy local stuff
+    . ~/.bashrc_local
+fi
