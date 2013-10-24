@@ -37,7 +37,7 @@ au BufRead,BufNewFile *.py,*.pyw match OverLength /\%80v.\+/
 map <Leader>b Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>
 
 " Smaller tabs in html/js files
-au BufRead,BufNewFile *.html,*.js set ts=2 | set sw=2
+au BufRead,BufNewFile *.html,*.js setlocal ts=2 | set sw=2
 
 au BufRead,BufNewFile *.wsgi set filetype=python
 
