@@ -100,19 +100,22 @@ fi
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
+if [ -f /usr/local/etc/bash_completion ]; then
+    . /usr/local/etc/bash_completion
+    echo "Extended Complete enabled"
+fi
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
-    . ~/bin/django_bash_completion
-    . ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
     echo "Extended Complete enabled"
 fi
 #Or on Solaris
 if [ -f /opt/csw/etc/bash_completion ]; then
     . /opt/csw/etc/bash_completion
-    . ~/bin/django_bash_completion
-    . ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
     echo "Extended Complete enabled"
 fi
+
+. ~/bin/django_bash_completion
+. ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
 
 alias here='cd `pwd -P`'
 
