@@ -74,6 +74,10 @@ nmap <Leader>s :setlocal spell!<CR>
 " Sort a paragraph (like a block of imports)
 map <leader>s vip:sort<cr>
 
+" Keep visual block when shifting
+vnoremap > >gv
+vnoremap < <gv
+
 " ctrlp stuff
 let g:ctrlp_max_height = 30
 let g:ctrlp_working_path_mode = 'ra'
@@ -89,3 +93,5 @@ set wildignore+=*/migrations/*
 " If you have errors about jedi at startup: pip install jedi
 " leader-n is new a ctrlp tab, lets use leader-a for all usages
 let g:jedi#usages_command = "<leader>a"
+" Don't pop docstring window on completion (only on <S-k>)
+autocmd FileType python setlocal completeopt-=preview
