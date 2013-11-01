@@ -169,9 +169,10 @@ else
     export WORKON_HOME=~/virtual_envs
 fi
 
-if [ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]; then
-    source /usr/local/bin/virtualenvwrapper_lazy.sh
-elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+#Lazy breaks tab completion for workon :(
+#if [ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]; then
+#    source /usr/local/bin/virtualenvwrapper_lazy.sh
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
