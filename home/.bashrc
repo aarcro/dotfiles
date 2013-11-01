@@ -9,7 +9,7 @@ umask 0027
 export VISUAL=vim
 
 # Check for brew
-if which -s brew; then
+if which brew > /dev/null; then
     BREW_PATH=`brew --prefix`
 fi
 
