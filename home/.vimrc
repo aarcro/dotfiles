@@ -16,7 +16,11 @@ set sw=4
 set et
 set ai
 syntax on
+
+" Search stuff
 set hlsearch
+set ignorecase
+set smartcase
 
 :function! Go_wide()
 :% s/,/	/g
