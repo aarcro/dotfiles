@@ -24,7 +24,7 @@ screen bash -l
 title "view"
 
 # Allow some local stuff
-source .screenrc.local
+source .screenrc_local
 # maybe like this:
 #bind r eval 'exec touch /opt/virtual_envs/$PROJECT/$REPO/server_configs/$HOST/portal.wsgi' 'echo "WSGI Reloaded"'
 #bind g eval 'exec /opt/virtual_envs/$PROJECT/bin/bounce-gunicorn' 'echo "Gunicorn Reloaded"'

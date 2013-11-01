@@ -3,10 +3,16 @@
 # for examples
 umask 0027
 
-export VISUAL=vim
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
+
+export VISUAL=vim
+
+# Check for brew
+if which -s brew; then
+    BREW_PATH=`brew --prefix`
+fi
+
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
@@ -101,26 +107,23 @@ fi
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
-    . ~/bin/django_bash_completion
-    . ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
     echo "Extended Complete enabled"
 fi
 #Or on Solaris
 if [ -f /opt/csw/etc/bash_completion ]; then
     . /opt/csw/etc/bash_completion
-    . ~/bin/django_bash_completion
-    . ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
     echo "Extended Complete enabled"
 fi
 # Or Mac (with homebrew)
-if which -s brew; then
-  if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
-    . ~/bin/django_bash_completion
-    . ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
+if [ -n "$BREW_PATH" ]; then
+  if [ -f $BREW_PATH/etc/bash_completion ]; then
+    . $BREW_PATH/etc/bash_completion
     echo "Extended Complete enabled"
   fi
 fi
+
+. ~/bin/django_bash_completion
+. ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
 
 alias here='cd `pwd -P`'
 
@@ -152,15 +155,47 @@ function py_find {
     type_find py $*
 }
 
-if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+#Virtenv wrapper
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+if [ -n "$BREW_PATH" ]; then
+    if [ -x $BREW_PATH/bin/python ]; then
+        export VIRTUALENVWRAPPER_PYTHON=$BREW_PATH/bin/python
+    fi
+fi
+
+if [ -d /opt/virtual_envs ]; then
+    export WORKON_HOME=/opt/virtual_envs
+else
     export WORKON_HOME=~/virtual_envs
-    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+fi
+
+if [ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]; then
+    source /usr/local/bin/virtualenvwrapper_lazy.sh
+elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
+
+alias newproject="/bin/bash ~/newproject.sh"
 
 if [ -f $HOME/.pythonrc.py ]; then
     export PYTHONSTARTUP=$HOME/.pythonrc.py
 fi
 
+# pip bash completion start
+_pip_completion()
+{
+    COMPREPLY=( $( COMP_WORDS="${COMP_WORDS[*]}" \
+                   COMP_CWORD=$COMP_CWORD \
+                   PIP_AUTO_COMPLETE=1 $1 ) )
+}
+complete -o default -F _pip_completion pip
+# pip bash completion end
+
 alias homeshick="source $HOME/.homesick/repos/homeshick/bin/homeshick.sh"
 complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
+alias start_gunicorn="if [[ -x ./manage.py ]] ; then ./manage.py run_gunicorn localhost:8080 --timeout 3600 --graceful-timeout=3600 --pid=../../tmp/gunicorn.pid ; else echo 'No manage.py fournd' ; fi"
+
+if [ -f ~/.bashrc_local ]; then
+    #Here's a chance to do crazy local stuff
+    . ~/.bashrc_local
+fi

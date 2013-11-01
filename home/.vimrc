@@ -4,6 +4,9 @@ autocmd! bufwritepost .vimrc source %
 " Load pathogen - package mangement for vim
 call pathogen#infect()
 
+" Respect comments like // vim: set ts=2
+set modeline
+
 "The default leader is '\', but many people prefer ',' as it's in a standard location
 let mapleader = ','
 
@@ -16,13 +19,14 @@ syntax on
 set hlsearch
 
 :function! Go_wide()
-:% s/,/ /g
+:% s/,/	/g
 :set ts=40
 :set nowrap
 :set ss=5
 :endfunction
 
 nnoremap <C-p> :set invpaste paste?<CR>
+inoremap <C-p> <esc>:set invpaste paste?<CR>a
 set pastetoggle=<C-p>
 set showmode
 
@@ -32,8 +36,10 @@ au BufRead,BufNewFile *.py,*.pyw match OverLength /\%80v.\+/
 " Add breakpoints
 map <Leader>b Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>
 
-" better for html
-au BufRead,BufNewFile *.html,*.js set ts=2|set sw=2
+" Smaller tabs in html/js files
+au BufRead,BufNewFile *.html,*.js setlocal ts=2 | set sw=2
+
+au BufRead,BufNewFile *.wsgi set filetype=python
 
 " Making it so ; works like : for commands. Saves typing and eliminates :W style typos due to lazy holding shift.
 nnoremap ; :
@@ -60,6 +66,10 @@ set showtabline=2
 :% s/”/\&rdquo;/g
 :% s/’/\&rsquo;/g
 :endfunction
+
+" toggle spelling use ,p
+imap <Leader>p <C-o>:setlocal spell!<CR>
+nmap <Leader>p :setlocal spell!<CR>
 
 " Sort a paragraph (like a block of imports)
 map <leader>s vip:sort<cr>
