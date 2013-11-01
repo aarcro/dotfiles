@@ -3,10 +3,16 @@
 # for examples
 umask 0027
 
-export VISUAL=vim
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
+
+export VISUAL=vim
+
+# Check for brew
+if which -s brew; then
+    BREW_PATH=`brew --prefix`
+fi
+
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
@@ -90,29 +96,34 @@ if [ -x /usr/bin/dircolors ]; then
     #alias grep='grep --color=auto'
     #alias fgrep='fgrep --color=auto'
     #alias egrep='egrep --color=auto'
+else
+    # Probably Mac, this will help
+    export CLICOLOR=1
+    export LSCOLORS=gxFxCxDxBxegedabagacad
 fi
-
-# some more ls aliases
-#alias ll='ls -l'
-#alias la='ls -A'
-#alias l='ls -CF'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
-    . ~/bin/django_bash_completion
-    . ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
     echo "Extended Complete enabled"
 fi
 #Or on Solaris
 if [ -f /opt/csw/etc/bash_completion ]; then
     . /opt/csw/etc/bash_completion
-    . ~/bin/django_bash_completion
-    . ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
     echo "Extended Complete enabled"
 fi
+# Or Mac (with homebrew)
+if [ -n "$BREW_PATH" ]; then
+  if [ -f $BREW_PATH/etc/bash_completion ]; then
+    . $BREW_PATH/etc/bash_completion
+    echo "Extended Complete enabled"
+  fi
+fi
+
+. ~/bin/django_bash_completion
+. ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
 
 alias here='cd `pwd -P`'
 
@@ -146,6 +157,11 @@ function py_find {
 
 #Virtenv wrapper
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+if [ -n "$BREW_PATH" ]; then
+    if [ -x $BREW_PATH/bin/python ]; then
+        export VIRTUALENVWRAPPER_PYTHON=$BREW_PATH/bin/python
+    fi
+fi
 
 if [ -d /opt/virtual_envs ]; then
     export WORKON_HOME=/opt/virtual_envs
@@ -176,6 +192,7 @@ complete -o default -F _pip_completion pip
 # pip bash completion end
 
 alias homeshick="source $HOME/.homesick/repos/homeshick/bin/homeshick.sh"
+complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
 alias start_gunicorn="if [[ -x ./manage.py ]] ; then ./manage.py run_gunicorn localhost:8080 --timeout 3600 --graceful-timeout=3600 --pid=../../tmp/gunicorn.pid ; else echo 'No manage.py fournd' ; fi"
 
 if [ -f ~/.bashrc_local ]; then

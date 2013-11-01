@@ -67,9 +67,9 @@ set showtabline=2
 :% s/’/\&rsquo;/g
 :endfunction
 
-" toggle spelling use ,s
-imap <Leader>s <C-o>:setlocal spell!<CR>
-nmap <Leader>s :setlocal spell!<CR>
+" toggle spelling use ,p
+imap <Leader>p <C-o>:setlocal spell!<CR>
+nmap <Leader>p :setlocal spell!<CR>
 
 " Sort a paragraph (like a block of imports)
 map <leader>s vip:sort<cr>
