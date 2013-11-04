@@ -194,7 +194,8 @@ complete -o default -F _pip_completion pip
 
 alias homeshick="source $HOME/.homesick/repos/homeshick/bin/homeshick.sh"
 complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
-alias start_gunicorn="if [[ -x ./manage.py ]] ; then ./manage.py run_gunicorn localhost:8080 --timeout 3600 --graceful-timeout=3600 --pid=../../tmp/gunicorn.pid ; else echo 'No manage.py fournd' ; fi"
+alias start_gunicorn="if [[ -x ./manage.py ]] ; then ./manage.py run_gunicorn localhost:8080 --timeout 3600 --graceful-timeout=3600 --pid=../../tmp/gunicorn.pid ; else echo 'No manage.py found' ; fi"
+alias collectstatic="if [[ -x ./manage.py ]] ; then ./manage.py collectstatic --noinput ; else echo 'No manage.py found' ; fi"
 
 if [ -f ~/.bashrc_local ]; then
     #Here's a chance to do crazy local stuff
