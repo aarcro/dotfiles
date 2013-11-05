@@ -48,7 +48,7 @@ setlocal foldmethod=expr
 setlocal foldexpr=GetPythonFold(v:lnum)
 setlocal foldtext=PythonFoldText()
 setlocal foldcolumn=2
-let b:folded = 1
+let b:folded = 0
 
 function! PythonFoldText()
   let fs = v:foldstart

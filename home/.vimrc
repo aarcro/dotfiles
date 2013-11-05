@@ -10,6 +10,8 @@ set modeline
 "The default leader is '\', but many people prefer ',' as it's in a standard location
 let mapleader = ','
 
+" If you're having trouble with colors:
+" set t_Co=256
 colors desert256
 set ts=4
 set sw=4
@@ -34,9 +36,10 @@ inoremap <C-p> <esc>:set invpaste paste?<CR>a
 set pastetoggle=<C-p>
 set showmode
 
-" Only in python files
-au BufRead,BufNewFile *.py,*.pyw highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-au BufRead,BufNewFile *.py,*.pyw match OverLength /\%80v.\+/
+" Highlight column 80
+set colorcolumn=80
+highlight ColorColumn ctermbg=233
+
 " Add breakpoints
 map <Leader>b Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>
 
