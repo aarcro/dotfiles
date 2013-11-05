@@ -47,20 +47,8 @@ endif
 setlocal foldmethod=expr
 setlocal foldexpr=GetPythonFold(v:lnum)
 setlocal foldtext=PythonFoldText()
-
-map <buffer> f za
-map <buffer> F :call ToggleFold()<CR>
+setlocal foldcolumn=2
 let b:folded = 1
-
-function! ToggleFold()
-    if( b:folded == 0 )
-        exec "normal! zM"
-        let b:folded = 1
-    else
-        exec "normal! zR"
-        let b:folded = 0
-    endif
-endfunction
 
 function! PythonFoldText()
   let fs = v:foldstart
@@ -143,7 +131,7 @@ function! GetPythonFold(lnum)
         endif
     " Case E***: empty lines fold with previous
     " (***) change '=' to -1 if you want empty lines/comment out of a fold
-    elseif line == '' | return '='
+    elseif line == '' | return -1
     endif
     " now we need the indent from previous
     let p = prevnonblank(a:lnum-1)

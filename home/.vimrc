@@ -10,7 +10,7 @@ set modeline
 "The default leader is '\', but many people prefer ',' as it's in a standard location
 let mapleader = ','
 
-colors desert
+colors desert256
 set ts=4
 set sw=4
 set et
@@ -99,3 +99,25 @@ set wildignore+=*/migrations/*
 let g:jedi#usages_command = "<leader>a"
 " Don't pop docstring window on completion (only on <S-k>)
 autocmd FileType python setlocal completeopt-=preview
+
+" Folding colors (don't know why default is whack)
+:highlight Folded guibg=grey guifg=blue ctermbg=3
+:highlight FoldColumn guibg=darkgrey guifg=white ctermbg=0 ctermfg=1
+
+" Don't confuse people who don't know folds
+set foldlevelstart=99
+
+" eazy maps to toggle folding
+map f za
+map F :call ToggleFold()<CR>
+let b:folded = 1
+
+function! ToggleFold()
+    if( b:folded == 0 )
+        exec "normal! zM"
+        let b:folded = 1
+    else
+        exec "normal! zR"
+        let b:folded = 0
+    endif
+endfunction
