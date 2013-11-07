@@ -178,7 +178,12 @@ _pip_completion()
 complete -o default -F _pip_completion pip
 # pip bash completion end
 
-alias homeshick="source $HOME/.homesick/repos/homeshick/bin/homeshick.sh"
+if [ -f $HOME/.homeshick/repos/homeshick/homeshick.sh ]; then
+    source $HOME/.homeshick/repos/homeshick/homeshick.sh 
+else
+    echo "homeshick is out of date"
+    alias homeshick="source $HOME/.homesick/repos/homeshick/bin/homeshick.sh"
+fi
 alias start_gunicorn="if [[ -x ./manage.py ]] ; then ./manage.py run_gunicorn localhost:8080 --timeout 3600 --graceful-timeout=3600 --pid=../../tmp/gunicorn.pid ; else echo 'No manage.py fournd' ; fi"
 
 if [ -f ~/.bashrc_local ]; then
