@@ -192,8 +192,8 @@ _pip_completion()
 complete -o default -F _pip_completion pip
 # pip bash completion end
 
-if [ -f $HOME/.homeshick/repos/homeshick/homeshick.sh ]; then
-    source $HOME/.homeshick/repos/homeshick/homeshick.sh 
+if [ -f $HOME/.homesick/repos/homeshick/homeshick.sh ]; then
+    source $HOME/.homesick/repos/homeshick/homeshick.sh
 else
     echo "homeshick is out of date"
     alias homeshick="source $HOME/.homesick/repos/homeshick/bin/homeshick.sh"
