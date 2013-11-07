@@ -104,7 +104,7 @@ let g:jedi#usages_command = "<leader>a"
 autocmd FileType python setlocal completeopt-=preview
 
 " Folding colors (don't know why default is whack)
-:highlight Folded guibg=grey guifg=blue ctermbg=3
+:highlight Folded guibg=grey guifg=blue ctermbg=233
 :highlight FoldColumn guibg=darkgrey guifg=white ctermbg=0 ctermfg=1
 
 " Don't confuse people who don't know folds
