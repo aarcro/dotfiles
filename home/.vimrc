@@ -10,13 +10,19 @@ set modeline
 "The default leader is '\', but many people prefer ',' as it's in a standard location
 let mapleader = ','
 
-colors desert
+" If you're having trouble with colors:
+" set t_Co=256
+colors desert256
 set ts=4
 set sw=4
 set et
 set ai
 syntax on
+
+" Search stuff
 set hlsearch
+set ignorecase
+set smartcase
 
 :function! Go_wide()
 :% s/,/	/g
@@ -30,9 +36,10 @@ inoremap <C-p> <esc>:set invpaste paste?<CR>a
 set pastetoggle=<C-p>
 set showmode
 
-" Only in python files
-au BufRead,BufNewFile *.py,*.pyw highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-au BufRead,BufNewFile *.py,*.pyw match OverLength /\%80v.\+/
+" Highlight column 80
+set colorcolumn=80
+highlight ColorColumn ctermbg=233
+
 " Add breakpoints
 map <Leader>b Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>
 
@@ -67,12 +74,16 @@ set showtabline=2
 :% s/’/\&rsquo;/g
 :endfunction
 
-" toggle spelling use ,s
-imap <Leader>s <C-o>:setlocal spell!<CR>
-nmap <Leader>s :setlocal spell!<CR>
+" toggle spelling use ,p
+imap <Leader>p <C-o>:setlocal spell!<CR>
+nmap <Leader>p :setlocal spell!<CR>
 
 " Sort a paragraph (like a block of imports)
 map <leader>s vip:sort<cr>
+
+" Keep visual block when shifting
+vnoremap > >gv
+vnoremap < <gv
 
 " ctrlp stuff
 let g:ctrlp_max_height = 30
@@ -89,3 +100,27 @@ set wildignore+=*/migrations/*
 " If you have errors about jedi at startup: pip install jedi
 " leader-n is new a ctrlp tab, lets use leader-a for all usages
 let g:jedi#usages_command = "<leader>a"
+" Don't pop docstring window on completion (only on <S-k>)
+autocmd FileType python setlocal completeopt-=preview
+
+" Folding colors (don't know why default is whack)
+:highlight Folded guibg=grey guifg=blue ctermbg=3
+:highlight FoldColumn guibg=darkgrey guifg=white ctermbg=0 ctermfg=1
+
+" Don't confuse people who don't know folds
+set foldlevelstart=99
+
+" eazy maps to toggle folding
+map f za
+map F :call ToggleFold()<CR>
+let b:folded = 1
+
+function! ToggleFold()
+    if( b:folded == 0 )
+        exec "normal! zM"
+        let b:folded = 1
+    else
+        exec "normal! zR"
+        let b:folded = 0
+    endif
+endfunction

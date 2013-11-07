@@ -23,6 +23,12 @@ title "model"
 screen bash -l
 title "view"
 
+# Scary termcap stuff for 256 color support
+# http://robotsrule.us/vim/
+attrcolor b ".I"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E38;5;%dm'
+defbce "on"
+
 # Allow some local stuff
 source .screenrc_local
 # maybe like this:
