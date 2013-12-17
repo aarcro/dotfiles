@@ -64,7 +64,6 @@ imap <C-h> <esc>:tabp<CR>
 imap <C-l> <esc>:tabn<CR>
 map <C-n> :tabnew 
 map <leader>n :tabnew<CR>:CtrlP<CR>
-map <leader>o :CtrlP<CR>
 
 set showtabline=2
 
@@ -88,6 +87,8 @@ vnoremap < <gv
 " ctrlp stuff
 let g:ctrlp_max_height = 30
 let g:ctrlp_working_path_mode = 'ra'
+"<c-p> is paste toggle, I don't care what ctrlp is called
+let g:ctrlp_map = '<leader>o'
 
 " Common files to ignore
 set wildignore+=*.pyc
