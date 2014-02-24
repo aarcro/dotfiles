@@ -10,6 +10,8 @@ set modeline
 "The default leader is '\', but many people prefer ',' as it's in a standard location
 let mapleader = ','
 
+nmap <Leader>t :% s/\s\+$//<CR>,/''
+
 " If you're having trouble with colors:
 " set t_Co=256
 colors desert256
@@ -94,6 +96,8 @@ let g:ctrlp_map = '<leader>o'
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
+set wildignore+=*/serve[-_]static/*
+set wildignore+=*/site[-_]media/*
 " I don't want to see all the migrations
 set wildignore+=*/migrations/*
 
@@ -125,3 +129,7 @@ function! ToggleFold()
         let b:folded = 0
     endif
 endfunction
+
+" Fix this
+" :match ExtraWhitespace /\s\+$/
+" :highlight ExtraWhitespace ctermbg=red guibg=red

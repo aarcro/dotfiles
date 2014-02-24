@@ -22,10 +22,12 @@ TERM con80x60
 TERM dtterm
 TERM xterm
 TERM xterm-color
+TERM xterm-256color
 TERM xterm-debian
 TERM rxvt
 TERM screen
 TERM screen-w
+TERM screen-256color-bce
 TERM vt100
 TERM Eterm
 

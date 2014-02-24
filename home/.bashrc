@@ -3,6 +3,8 @@
 # for examples
 umask 0027
 
+#TERM=screen
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -148,11 +150,11 @@ alias vi=vim
 function type_find {
     TYPE=$1
     shift 1
-    find ./ -name \*$TYPE -exec grep -H $* {} \;
+    find ./ -name \*$TYPE -exec grep -H $@ {} \;
 }
 
 function py_find {
-    type_find py $*
+    type_find py $@
 }
 
 #Virtenv wrapper
