@@ -13,6 +13,7 @@ export VISUAL=vim
 # Check for brew
 if which brew > /dev/null; then
     BREW_PATH=`brew --prefix`
+    export PATH=${BREW_PATH}/sbin:${PATH}
 fi
 
 
