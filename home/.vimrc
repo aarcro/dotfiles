@@ -50,6 +50,8 @@ au BufRead,BufNewFile *.html,*.js setlocal ts=2 | set sw=2
 
 au BufRead,BufNewFile *.wsgi set filetype=python
 
+au BufRead,BufNewFile psql.edit.* set filetype=sql
+
 " Making it so ; works like : for commands. Saves typing and eliminates :W style typos due to lazy holding shift.
 nnoremap ; :
 
@@ -129,6 +131,16 @@ function! ToggleFold()
         let b:folded = 0
     endif
 endfunction
+
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
+
 
 " Fix this
 " :match ExtraWhitespace /\s\+$/
