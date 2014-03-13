@@ -43,6 +43,7 @@ fi
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color) color_prompt=yes;;
+    xterm-256color) color_prompt=yes;;
     ansi) color_prompt=yes;;
     screen) color_prompt=yes;;
     screen-bce) color_prompt=yes;;
@@ -65,9 +66,9 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\033[0;36m$(git branch 2> /dev/null | grep -e "\* " | sed "s/^..\(.*\)/{\1}:/")\033[00m\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(git branch 2> /dev/null | grep -e "\* " | sed "s/^..\(.*\)/{\1}:/")\$'
 fi
 unset color_prompt force_color_prompt
 
