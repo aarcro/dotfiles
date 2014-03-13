@@ -208,6 +208,12 @@ complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g 
 alias start_gunicorn="if [[ -x ./manage.py ]] ; then ./manage.py run_gunicorn localhost:8080 --timeout 3600 --graceful-timeout=3600 --pid=../../tmp/gunicorn.pid ; else echo 'No manage.py found' ; fi"
 alias collectstatic="if [[ -x ./manage.py ]] ; then ./manage.py collectstatic --noinput ; else echo 'No manage.py found' ; fi"
 
+# Static AUTH_SOCK for screen
+if [ -S "$SSH_AUTH_SOCK" ] && [ ! -h "$SSH_AUTH_SOCK" ]; then
+    ln -sf "$SSH_AUTH_SOCK" ~/.agent
+fi
+export SSH_AUTH_SOCK=~/.agent
+
 if [ -f ~/.bashrc_local ]; then
     #Here's a chance to do crazy local stuff
     . ~/.bashrc_local
