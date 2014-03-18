@@ -221,5 +221,5 @@ if [ -f ~/.bashrc_local ]; then
     #Here's a chance to do crazy local stuff
     . ~/.bashrc_local
 fi
-alias back='cd /home/vagrant/devel/cms_dev/src'
+alias back='cd ${ACM_BACK_DIR}'
 alias mark='ACM_BACK_DIR=`pwd`'
