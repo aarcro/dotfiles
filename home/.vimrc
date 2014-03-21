@@ -39,8 +39,10 @@ set pastetoggle=<C-p>
 set showmode
 
 " Highlight column 80
-set colorcolumn=80
-highlight ColorColumn ctermbg=233
+if version >= 703
+    set colorcolumn=80
+    highlight ColorColumn ctermbg=233
+endif
 
 " Add breakpoints
 map <Leader>b Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>
