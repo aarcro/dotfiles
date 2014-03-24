@@ -11,7 +11,7 @@ umask 0027
 export VISUAL=vim
 
 # Check for brew
-if which brew > /dev/null; then
+if which brew 2> /dev/null; then
     BREW_PATH=`brew --prefix`
     export PATH=${BREW_PATH}/sbin:${PATH}
 fi
@@ -179,6 +179,9 @@ fi
 #    source /usr/local/bin/virtualenvwrapper_lazy.sh
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
+#CentOS
+elif [ -f /usr/bin/virtualenvwrapper.sh ]; then
+    source /usr/bin/virtualenvwrapper.sh
 fi
 
 alias newproject="/bin/bash ~/newproject.sh"
@@ -221,3 +224,5 @@ if [ -f ~/.bashrc_local ]; then
     #Here's a chance to do crazy local stuff
     . ~/.bashrc_local
 fi
+alias back='cd ${ACM_BACK_DIR}'
+alias mark='ACM_BACK_DIR=`pwd`'
