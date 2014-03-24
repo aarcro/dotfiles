@@ -1,6 +1,8 @@
 [user]
 	name = Aaron McMillin
 	email = github@aaron.mcmillinclan.org
+[push]
+	default = matching
 [color]
 	ui = true
 [alias]
