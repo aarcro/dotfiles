@@ -8,3 +8,5 @@
 [alias]
     pr = pull --rebase
     lc = log ORIG_HEAD.. --stat --no-merges
+[core]
+	pager = less -FRXS
