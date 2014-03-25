@@ -2,7 +2,7 @@
 	name = Aaron McMillin
 	email = github@aaron.mcmillinclan.org
 [push]
-	default = matching
+	default = current
 [color]
 	ui = true
 [alias]
