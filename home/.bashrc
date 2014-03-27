@@ -150,14 +150,17 @@ export PATH=~/bin:${PATH}:/usr/sbin:/sbin
 #For some reason using screen requires this
 alias vi=vim
 
-function type_find {
+function type_find ()
+{
     TYPE=$1
-    shift 1
-    find ./ -name \*$TYPE -exec grep -H $@ {} \;
+    shift
+    find ./ -name \*$TYPE -exec grep -H "$@" {} \;
+    unset TYPE
 }
 
-function py_find {
-    type_find py $@
+function py_find ()
+{
+    type_find py "$@"
 }
 
 #Virtenv wrapper
