@@ -67,9 +67,9 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\033[0;36m$(git branch 2> /dev/null | grep -e "\* " | sed "s/^..\(.*\)/{\1}:/")\033[00m\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\033[0;36m$(git branch 2> /dev/null | grep -e "\* " | sed "s/^..\(.*\)/{$(basename $(git rev-parse --show-toplevel 2> /dev/null) 2> /dev/null):\1}:/")\033[00m\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(git branch 2> /dev/null | grep -e "\* " | sed "s/^..\(.*\)/{\1}:/")\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w(git branch 2> /dev/null | grep -e "\* " | sed "s/^..\(.*\)/{$(basename $(git rev-parse --show-toplevel 2> /dev/null) 2> /dev/null):$\1}:/")\$ '
 fi
 unset color_prompt force_color_prompt
 
