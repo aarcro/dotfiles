@@ -1,0 +1,12 @@
+[user]
+	name = Aaron McMillin
+	email = github@aaron.mcmillinclan.org
+[push]
+	default = matching
+[color]
+	ui = true
+[alias]
+    pr = pull --rebase
+    lc = log ORIG_HEAD.. --stat --no-merges
+[core]
+	pager = less -FRXS
