@@ -208,9 +208,7 @@ else
 fi
 alias start_gunicorn="if [[ -x ./manage.py ]] ; then ./manage.py run_gunicorn localhost:8080 --timeout 3600 --graceful-timeout=3600 --pid=../../tmp/gunicorn.pid ; else echo 'No manage.py fournd' ; fi"
 
-if [ -f ~/.ssh/known_hosts ]; then
-    complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
-fi
+complete -W "$([ -f ~/.ssh/config ] && grep -v "[?*]" ~/.ssh/config | awk '/^Host / {sub("^Host ", ""); print $0;}') $([ -f ~/.ssh/known_hosts ] && echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
 alias start_gunicorn="if [[ -x ./manage.py ]] ; then ./manage.py run_gunicorn localhost:8080 --timeout 3600 --graceful-timeout=3600 --pid=../../tmp/gunicorn.pid ; else echo 'No manage.py found' ; fi"
 alias collectstatic="if [[ -x ./manage.py ]] ; then ./manage.py collectstatic --noinput ; else echo 'No manage.py found' ; fi"
 
