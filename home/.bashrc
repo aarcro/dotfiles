@@ -60,16 +60,16 @@ if [ -n "$force_color_prompt" ]; then
 	# We have color support; assume it's compliant with Ecma-48
 	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
 	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\033[0;36m$(git branch 2> /dev/null | grep -e "\* " | sed "s/^..\(.*\)/{$(basename $(git rev-parse --show-toplevel 2> /dev/null) 2> /dev/null):\1}:/")\033[00m\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\[\033[0;36m\]$(git branch 2> /dev/null | grep -e "\* " | sed "s/^..\(.*\)/{$(basename $(git rev-parse --show-toplevel 2> /dev/null) 2> /dev/null):\1}:/")\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w(git branch 2> /dev/null | grep -e "\* " | sed "s/^..\(.*\)/{$(basename $(git rev-parse --show-toplevel 2> /dev/null) 2> /dev/null):$\1}:/")\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(git branch 2> /dev/null | grep -e "\* " | sed "s/^..\(.*\)/{$(basename $(git rev-parse --show-toplevel 2> /dev/null) 2> /dev/null):$\1}:/")\$ '
 fi
 unset color_prompt force_color_prompt
 
