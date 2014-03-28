@@ -11,7 +11,7 @@ umask 0027
 export VISUAL=vim
 
 # Check for brew
-if which brew 2> /dev/null; then
+if [ $(which brew 2> /dev/null) ] ; then
     BREW_PATH=`brew --prefix`
     export PATH=${BREW_PATH}/sbin:${PATH}
 fi
