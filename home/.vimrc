@@ -38,9 +38,9 @@ inoremap <C-p> <esc>:set invpaste paste?<CR>a
 set pastetoggle=<C-p>
 set showmode
 
-" Highlight column 80
+" Highlight column 80 and 110
 if version >= 703
-    set colorcolumn=80
+    set colorcolumn=80,110
     highlight ColorColumn ctermbg=233
 endif
 
@@ -147,3 +147,27 @@ com! DiffSaved call s:DiffWithSaved()
 " Fix this
 " :match ExtraWhitespace /\s\+$/
 " :highlight ExtraWhitespace ctermbg=red guibg=red
+
+" http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
+
+command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
+function! s:RunShellCommand(cmdline)
+  echo a:cmdline
+  let expanded_cmdline = a:cmdline
+  for part in split(a:cmdline, ' ')
+     if part[0] =~ '\v[%#<]'
+        let expanded_part = fnameescape(expand(part))
+        let expanded_cmdline = substitute(expanded_cmdline, part, expanded_part, '')
+     endif
+  endfor
+  botright new
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  call setline(1, 'You entered:    ' . a:cmdline)
+  call setline(2, 'Expanded Form:  ' .expanded_cmdline)
+  call setline(3,substitute(getline(2),'.','=','g'))
+  execute '$read !'. expanded_cmdline
+  setlocal nomodifiable
+  1
+endfunction
+
+command! -complete=file -nargs=* Git call s:RunShellCommand('git '.<q-args>)

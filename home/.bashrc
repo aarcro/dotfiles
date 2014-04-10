@@ -163,6 +163,11 @@ function py_find ()
     type_find py "$@"
 }
 
+function table ()
+{
+  awk -F: '{gsub(/^  */, "", $2); printf("%-50s %s\n", $1, $2)}'
+}
+
 #Virtenv wrapper
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 if [ -n "$BREW_PATH" ]; then
