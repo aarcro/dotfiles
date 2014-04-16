@@ -33,6 +33,9 @@ set smartcase
 :set ss=5
 :endfunction
 
+" use cc to change 'til
+nnoremap cc ct
+
 nnoremap <C-p> :set invpaste paste?<CR>
 inoremap <C-p> <esc>:set invpaste paste?<CR>a
 set pastetoggle=<C-p>
