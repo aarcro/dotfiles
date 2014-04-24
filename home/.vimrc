@@ -71,7 +71,7 @@ map <C-h> :tabp<CR>
 map <C-l> :tabn<CR>
 imap <C-h> <esc>:tabp<CR>
 imap <C-l> <esc>:tabn<CR>
-map <C-n> :tabnew 
+map <C-n> :tabnew<Space>
 map <leader>n :tabnew<CR>:CtrlP<CR>
 
 set showtabline=2
@@ -154,8 +154,9 @@ com! DiffSaved call s:DiffWithSaved()
 " http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
 
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
-function! s:RunShellCommand(cmdline)
+function! s:RunShellCommand(cmdline,...)
   echo a:cmdline
+  let l:ft = a:0 > 0 ? a:1 : 'txt'
   let expanded_cmdline = a:cmdline
   for part in split(a:cmdline, ' ')
      if part[0] =~ '\v[%#<]'
@@ -170,7 +171,13 @@ function! s:RunShellCommand(cmdline)
   call setline(3,substitute(getline(2),'.','=','g'))
   execute '$read !'. expanded_cmdline
   setlocal nomodifiable
+  execute 'setf '. ft
   1
 endfunction
 
 command! -complete=file -nargs=* Git call s:RunShellCommand('git '.<q-args>)
+command! -complete=file -nargs=* Gdif call s:RunShellCommand('git diff '.<q-args>, 'diff')
+
+" Khuno
+nnoremap <silent><leader>k :Khuno show<CR>
+let g:khuno_max_line_length=110
