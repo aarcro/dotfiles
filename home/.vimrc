@@ -87,7 +87,10 @@ imap <Leader>p <C-o>:setlocal spell!<CR>
 nmap <Leader>p :setlocal spell!<CR>
 
 " Sort a paragraph (like a block of imports)
-map <leader>s vip:sort<cr>
+map <leader>s vip:sort<CR>
+
+" Sort a comma seperated list (like a line of imports)
+map <leader>S :call setline(line('.'),join(sort(split(getline('.'), ',\s*')), ', '))<CR>
 
 " Keep visual block when shifting
 vnoremap > >gv

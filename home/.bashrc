@@ -91,6 +91,10 @@ esac
 #    . ~/.bash_aliases
 #fi
 
+alias gs="git status"
+alias gl="git log --decorate --graph"
+alias gd="git diff"
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     eval "`dircolors -b ~/.dir_colors`"
