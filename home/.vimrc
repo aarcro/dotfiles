@@ -1,6 +1,3 @@
-" Automatic reloading of .vimrc
-autocmd! bufwritepost .vimrc source %
-
 " Load pathogen - package mangement for vim
 call pathogen#infect()
 
@@ -48,10 +45,10 @@ if version >= 703
 endif
 
 " Add breakpoints
-map <Leader>b Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>
+map <Leader>b :set paste<CR>Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>:set nopaste<CR>
 
 " Smaller tabs in html/js files
-au BufRead,BufNewFile *.html,*.js setlocal ts=2 | set sw=2
+au BufRead,BufNewFile *.html,*.js setlocal ts=2 sw=2
 
 au BufRead,BufNewFile *.wsgi set filetype=python
 
