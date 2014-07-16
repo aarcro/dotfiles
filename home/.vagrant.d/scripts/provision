@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
+echo "Personal provision script"
 if [ -f /usr/bin/apt-get ]; then
-    apt-get -y install ack-grep git-core vim
+    apt-get update  # Maybe bad things in the package index
+    apt-get -y install ack-grep git vim screen
 fi
 
 if [ -f /usr/bin/yum ]; then
-    yum install -y git-core screen
+    yum install -y git-core screen vim
 fi
 
 # Do homeshick bootstrap
 if [ ! -d /home/vagrant/.homesick ]; then
-    su -c "git clone git://github.com/andsens/homeshick.git /home/vagrant/.homesick/repos/homeshick" vagrant
-    su -c 'source /home/vagrant/.homesick/repos/homeshick/homeshick.sh && yes | homeshick clone aarcro/dotfiles' vagrant
+    u -c "git clone git://github.com/andsens/homeshick.git /home/vagrant/.homesick/repos/homeshick" vagrant
+    # su -c 'source /home/vagrant/.homesick/repos/homeshick/homeshick.sh && yes | homeshick clone aarcro/dotfiles' vagrant
 fi

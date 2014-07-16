@@ -1,3 +1,16 @@
 Vagrant::Config.run do |config|
+  config.vm.provision :shell, :inline => """
+    # FIXME this squelches an annoying message 'stdin: is not a tty' present in
+    # Ubuntu base boxes; remove after the fix gets baked into the base box.
+    echo Ignore the above error, \\'stdin: is not a tty\\'.
+    sed -i -e '/^mesg n$/s/^mesg n$/tty -s \\&\\& mesg n/' /root/.profile
+
+    # FIXME this only exists to overcome a bug datagrok left in the custom box; remove
+    # when fixed
+    if [ ! -e /root/fixed-statoverride ]; then
+        sed -i -e '/puppet/d' /var/lib/dpkg/statoverride
+        touch /root/fixed-statoverride
+    fi
+  """
     config.vm.provision :shell, :path => File.join(File.dirname(__FILE__), "scripts", "provision")
 end
