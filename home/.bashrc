@@ -91,6 +91,7 @@ esac
 #    . ~/.bash_aliases
 #fi
 
+alias gc="git commit -a"
 alias gs="git status"
 alias gl="git log --decorate --graph"
 alias gd="git diff"
