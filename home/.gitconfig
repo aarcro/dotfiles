@@ -6,7 +6,9 @@
 [color]
 	ui = true
 [alias]
+    dif = diff
     pr = pull --rebase
     lc = log ORIG_HEAD.. --stat --no-merges
+    st = status
 [core]
 	pager = less -FRXS
