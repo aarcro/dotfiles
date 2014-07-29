@@ -11,6 +11,6 @@ fi
 
 # Do homeshick bootstrap
 if [ ! -d /home/vagrant/.homesick ]; then
-    u -c "git clone git://github.com/andsens/homeshick.git /home/vagrant/.homesick/repos/homeshick" vagrant
+    su -c "git clone git://github.com/andsens/homeshick.git /home/vagrant/.homesick/repos/homeshick" vagrant
     # su -c 'source /home/vagrant/.homesick/repos/homeshick/homeshick.sh && yes | homeshick clone aarcro/dotfiles' vagrant
 fi

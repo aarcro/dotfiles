@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl -si -F 'content=<-' -F 'expiry_days=7' -F 'poster=amcm' http://dpaste.com/api/v2/ | grep ^Location: | colrm 1 10
