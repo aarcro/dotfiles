@@ -107,6 +107,8 @@ set wildignore+=*/serve[-_]static/*
 set wildignore+=*/site[-_]media/*
 " I don't want to see all the migrations
 set wildignore+=*/migrations/*
+" node_modules are annoying too
+set wildignore+=*/node_modules/*
 
 " jedi settings
 " If you have errors about jedi at startup: pip install jedi
