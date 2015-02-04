@@ -159,7 +159,7 @@ function type_find ()
 {
     TYPE=$1
     shift
-    find ./ -name \*$TYPE -type f -exec grep -H "$@" {} \;
+    find ./ -name \*$TYPE -type f -not -path "*node_modules*" -exec grep -H "$@" {} \;
     unset TYPE
 }
 
@@ -178,6 +178,8 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 if [ -n "$BREW_PATH" ]; then
     if [ -x $BREW_PATH/bin/python ]; then
         export VIRTUALENVWRAPPER_PYTHON=$BREW_PATH/bin/python
+    elif [ -x $BREW_PATH/bin/python3 ]; then
+        export VIRTUALENVWRAPPER_PYTHON=$BREW_PATH/bin/python3
     fi
 fi
 
