@@ -13,3 +13,6 @@
 [submodule "home/.vim/bundle/khuno"]
 	path = home/.vim/bundle/khuno
 	url = git@github.com:alfredodeza/khuno.vim.git
+[submodule "home/.vim/bundle/coveragepy"]
+	path = home/.vim/bundle/coveragepy
+	url = https://github.com/alfredodeza/coveragepy.vim.git

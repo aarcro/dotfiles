@@ -8,6 +8,8 @@ set modeline
 let mapleader = ','
 
 nmap <Leader>t :% s/\s\+$//<CR>,/''
+nmap <Leader>cs :Coveragepy show<CR>
+nmap <Leader>cr :Coveragepy report<CR>
 
 " If you're having trouble with colors:
 " set t_Co=256
