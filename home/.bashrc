@@ -159,7 +159,7 @@ function type_find ()
 {
     TYPE=$1
     shift
-    find ./ -name \*$TYPE -exec grep -H "$@" {} \;
+    find ./ -name \*$TYPE -type f -exec grep -H "$@" {} \;
     unset TYPE
 }
 

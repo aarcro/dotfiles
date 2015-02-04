@@ -14,3 +14,9 @@ Vagrant::Config.run do |config|
   """
     config.vm.provision :shell, :path => File.join(File.dirname(__FILE__), "scripts", "provision")
 end
+
+Vagrant.configure("2") do |config|
+    #Auto update races with shared folders in moreau
+   config.vbguest.auto_update = false
+end
+

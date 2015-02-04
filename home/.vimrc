@@ -80,7 +80,8 @@ set showtabline=2
 :endfunction
 
 " toggle spelling use ,p
-imap <Leader>p <C-o>:setlocal spell!<CR>
+" Not in insert!!!
+" imap <Leader>p <C-o>:setlocal spell!<CR>
 nmap <Leader>p :setlocal spell!<CR>
 
 " Sort a paragraph (like a block of imports)
