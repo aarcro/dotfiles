@@ -92,9 +92,10 @@ esac
 #fi
 
 alias gc="git commit -a"
-alias gs="git status"
-alias gl="git log --decorate --graph"
 alias gd="git diff"
+alias gl="git log --decorate --graph"
+alias gp="git pull --ff-only"
+alias gs="git status"
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
