@@ -1,6 +1,9 @@
 " Load pathogen - package mangement for vim
 call pathogen#infect()
 
+" build help tags
+Helptags
+
 " Respect comments like // vim: set ts=2
 set modeline
 

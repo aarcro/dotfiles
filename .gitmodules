@@ -16,3 +16,6 @@
 [submodule "home/.vim/bundle/coveragepy"]
 	path = home/.vim/bundle/coveragepy
 	url = https://github.com/alfredodeza/coveragepy.vim.git
+[submodule "home/.vim/bundle/vim-argumentative"]
+	path = home/.vim/bundle/vim-argumentative
+	url = git@github.com:PeterRincker/vim-argumentative.git
