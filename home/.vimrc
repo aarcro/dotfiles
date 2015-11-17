@@ -189,3 +189,8 @@ command! -complete=file -nargs=* Gdif call s:RunShellCommand('git diff '.<q-args
 " Khuno
 nnoremap <silent><leader>k :Khuno show<CR>
 let g:khuno_max_line_length=110
+
+" hardy - arduino
+let g:hardy_arduino_path = '/Applications/Arduino.app/Contents/MacOS/Arduino'
+nmap <Leader>av :ArduinoVerify<CR>
+nmap <Leader>au :ArduinoUpload<CR>
