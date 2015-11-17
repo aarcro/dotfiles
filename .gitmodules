@@ -19,3 +19,6 @@
 [submodule "home/.vim/bundle/vim-argumentative"]
 	path = home/.vim/bundle/vim-argumentative
 	url = git@github.com:PeterRincker/vim-argumentative.git
+[submodule "home/.vim/bundle/hardy"]
+	path = home/.vim/bundle/hardy
+	url = git://github.com/4Evergreen4/vim-hardy.git

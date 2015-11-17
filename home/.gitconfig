@@ -12,3 +12,5 @@
     st = status
 [core]
 	pager = less -FRXS
+[merge]
+	tool = vimdiff
