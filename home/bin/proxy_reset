@@ -1,4 +1,4 @@
 #!/bin/bash
 
-launchctl unload Library/LaunchAgents/org.openssh.dynamic-proxy.plist
-launchctl load Library/LaunchAgents/org.openssh.dynamic-proxy.plist
+launchctl unload ~/Library/LaunchAgents/org.openssh.dynamic-proxy.plist
+launchctl load ~/Library/LaunchAgents/org.openssh.dynamic-proxy.plist
