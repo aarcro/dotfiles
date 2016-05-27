@@ -54,9 +54,7 @@ map <Leader>b :set paste<CR>Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>:set n
 
 " Smaller tabs in html/js files
 au BufRead,BufNewFile *.html,*.js setlocal ts=2 sw=2
-
 au BufRead,BufNewFile *.wsgi set filetype=python
-
 au BufRead,BufNewFile psql.edit.* set filetype=sql
 
 " Making it so ; works like : for commands. Saves typing and eliminates :W style typos due to lazy holding shift.
@@ -69,6 +67,7 @@ nmap <silent> <leader>/ :nohlsearch<CR>
 cmap cwd lcd %:p:h
 cmap cd. lcd %:p:h
 
+" Change tabs
 map <C-h> :tabp<CR>
 map <C-l> :tabn<CR>
 imap <C-h> <esc>:tabp<CR>
@@ -94,6 +93,9 @@ map <leader>s vip:sort<CR>
 
 " Sort a comma seperated list (like a line of imports)
 map <leader>S :call setline(line('.'),join(sort(split(getline('.'), ',\s*')), ', '))<CR>
+
+" Breakup long lines on commas
+nmap <leader>c ^mc:s/, /,\r/g<CR>:nohlsearch<CR>V'c
 
 " Keep visual block when shifting
 vnoremap > >gv
