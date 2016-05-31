@@ -240,6 +240,7 @@ if [ -f ~/.bashrc_local ]; then
 fi
 alias back='cd ${ACM_BACK_DIR}'
 alias mark='ACM_BACK_DIR=`pwd`'
+alias docker-on='eval $(docker-machine env default)'
 
 # Termbin!
 alias tb="nc termbin.com 9999"
