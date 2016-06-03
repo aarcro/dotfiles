@@ -241,6 +241,7 @@ fi
 alias back='cd ${ACM_BACK_DIR}'
 alias mark='ACM_BACK_DIR=`pwd`'
 alias docker-on='eval $(docker-machine env default)'
+alias docker-aws='eval $(aws ecr get-login)'
 
 # Termbin!
 alias tb="nc termbin.com 9999"
