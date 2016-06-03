@@ -22,3 +22,6 @@
 [submodule "home/.vim/bundle/hardy"]
 	path = home/.vim/bundle/hardy
 	url = git://github.com/4Evergreen4/vim-hardy.git
+[submodule "home/.vim/bundle/YankRing"]
+	path = home/.vim/bundle/YankRing
+	url = git@github.com:vim-scripts/YankRing.vim.git

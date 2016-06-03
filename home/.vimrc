@@ -196,3 +196,17 @@ let g:khuno_max_line_length=110
 let g:hardy_arduino_path = '/Applications/Arduino.app/Contents/MacOS/Arduino'
 nmap <Leader>av :ArduinoVerify<CR>
 nmap <Leader>au :ArduinoUpload<CR>
+
+" YankRing
+
+let g:yankring_min_element_length = 2  " no single letters (Bad naugty x'er)
+let g:yankring_max_display = 80        " Overfill default 30 width
+let g:yankring_window_increment = 50   " <space> to toggle full big display
+let g:yankring_window_use_horiz = 0    " Use vertical split
+let g:yankring_manage_numbered_reg = 1 " YESSSS!!! YankRing take over number registers
+let g:yankring_history_file = '.yankring_history_file' " Hidden please
+let g:yankring_clipboard_monitor = 0   " No system pb integration
+
+" o for next, i for prev - they seem in a handy place
+let g:yankring_replace_n_pkey = '<C-o>'
+let g:yankring_replace_n_nkey = '<C-i>'
