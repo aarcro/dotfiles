@@ -210,3 +210,6 @@ let g:yankring_clipboard_monitor = 0   " No system pb integration
 " o for next, i for prev - they seem in a handy place
 let g:yankring_replace_n_pkey = '<C-o>'
 let g:yankring_replace_n_nkey = '<C-i>'
+
+" vim-terraform
+let g:terraform_fmt_on_save = 1
