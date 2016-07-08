@@ -89,13 +89,13 @@ set showtabline=2
 nmap <Leader>p :setlocal spell!<CR>
 
 " Sort a paragraph (like a block of imports)
-map <leader>s vip:sort<CR>
+map <leader>s vip:sort i<CR>
 
 " Sort a comma seperated list (like a line of imports)
 map <leader>S :call setline(line('.'),join(sort(split(getline('.'), ',\s*')), ', '))<CR>
 
 " Breakup long lines on commas
-nmap <leader>c ^mc:s/, /,\r/g<CR>:nohlsearch<CR>V'c
+nmap <leader>c ^mc:s/, /,\r/g<CR>:nohlsearch<CR>V'c=k%i,<CR><ESC>
 
 " Keep visual block when shifting
 vnoremap > >gv
@@ -208,8 +208,8 @@ let g:yankring_history_file = '.yankring_history_file' " Hidden please
 let g:yankring_clipboard_monitor = 0   " No system pb integration
 
 " o for next, i for prev - they seem in a handy place
-let g:yankring_replace_n_pkey = '<C-o>'
-let g:yankring_replace_n_nkey = '<C-i>'
+let g:yankring_replace_n_pkey = '<C-v>'
+let g:yankring_replace_n_nkey = '<C-b>'
 
 " vim-terraform
 let g:terraform_fmt_on_save = 1
