@@ -177,10 +177,11 @@ function table ()
 #Virtenv wrapper
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 if [ -n "$BREW_PATH" ]; then
-    if [ -x $BREW_PATH/bin/python ]; then
-        export VIRTUALENVWRAPPER_PYTHON=$BREW_PATH/bin/python
-    elif [ -x $BREW_PATH/bin/python3 ]; then
+    # Prefer python3 for virtual env
+    if [ -x $BREW_PATH/bin/python3 ]; then
         export VIRTUALENVWRAPPER_PYTHON=$BREW_PATH/bin/python3
+    elif [ -x $BREW_PATH/bin/python ]; then
+        export VIRTUALENVWRAPPER_PYTHON=$BREW_PATH/bin/python
     fi
 fi
 
@@ -245,3 +246,5 @@ alias docker-aws='eval $(aws ecr get-login)'
 
 # Termbin!
 alias tb="nc termbin.com 9999"
+
+alias do_sum="paste -sd+ - | bc"

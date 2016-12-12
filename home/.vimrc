@@ -14,6 +14,9 @@ nmap <Leader>t :% s/\s\+$//<CR>,/''
 nmap <Leader>cs :Coveragepy show<CR>
 nmap <Leader>cr :Coveragepy report<CR>
 
+" Take that TouchBar!
+inoremap <Leader><Leader> <esc>
+
 " If you're having trouble with colors:
 " set t_Co=256
 colors desert256

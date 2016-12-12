@@ -31,3 +31,6 @@
 [submodule "home/.vim/bundle/Dockerfile"]
 	path = home/.vim/bundle/Dockerfile
 	url = https://github.com/ekalinin/Dockerfile.vim.git
+[submodule "home/.vim/bundle/vim-json"]
+	path = home/.vim/bundle/vim-json
+	url = git@github.com:elzr/vim-json.git
