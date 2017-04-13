@@ -16,6 +16,8 @@ nmap <Leader>cr :Coveragepy report<CR>
 
 " Take that TouchBar!
 inoremap <Leader><Leader> <esc>
+vnoremap <Leader><Leader> <esc>
+inoremap <Leader><Leader><Leader> ,<esc>
 
 " If you're having trouble with colors:
 " set t_Co=256
@@ -54,6 +56,8 @@ endif
 
 " Add breakpoints
 map <Leader>b :set paste<CR>Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>:set nopaste<CR>
+map <Leader>d :set paste<CR>O<pre> {% filter force_escape %} {% debug %} {% endfilter %}</pre>{# FIXME: DEBUG #}<C-c>:set nopaste<CR>
+
 
 " Smaller tabs in html/js files
 au BufRead,BufNewFile *.html,*.js setlocal ts=2 sw=2

@@ -92,6 +92,8 @@ esac
 #    . ~/.bash_aliases
 #fi
 
+alias vissh="vi ~/.ssh/config"
+
 alias gc="git commit -a"
 alias gd="git diff"
 alias gl="git log --decorate --graph"
