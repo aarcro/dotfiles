@@ -9,31 +9,31 @@
 	url = https://github.com/kien/ctrlp.vim.git
 [submodule "home/.vim/bundle/vim-surround"]
 	path = home/.vim/bundle/vim-surround
-	url = git://github.com/tpope/vim-surround.git
+	url = https://github.com/tpope/vim-surround.git
 [submodule "home/.vim/bundle/khuno"]
 	path = home/.vim/bundle/khuno
-	url = git@github.com:alfredodeza/khuno.vim.git
+	url = https://github.com/alfredodeza/khuno.vim.git
 [submodule "home/.vim/bundle/coveragepy"]
 	path = home/.vim/bundle/coveragepy
 	url = https://github.com/alfredodeza/coveragepy.vim.git
 [submodule "home/.vim/bundle/vim-argumentative"]
 	path = home/.vim/bundle/vim-argumentative
-	url = git@github.com:PeterRincker/vim-argumentative.git
+	url = https://github.com/PeterRincker/vim-argumentative.git
 [submodule "home/.vim/bundle/hardy"]
 	path = home/.vim/bundle/hardy
-	url = git://github.com/4Evergreen4/vim-hardy.git
+	url = https://github.com/4Evergreen4/vim-hardy.git
 [submodule "home/.vim/bundle/YankRing"]
 	path = home/.vim/bundle/YankRing
-	url = git@github.com:vim-scripts/YankRing.vim.git
+	url = https://github.com/vim-scripts/YankRing.vim.git
 [submodule "home/.vim/bundle/terraform"]
 	path = home/.vim/bundle/terraform
-	url = git@github.com:hashivim/vim-terraform.git
+	url = https://github.com/hashivim/vim-terraform.git
 [submodule "home/.vim/bundle/Dockerfile"]
 	path = home/.vim/bundle/Dockerfile
 	url = https://github.com/ekalinin/Dockerfile.vim.git
 [submodule "home/.vim/bundle/vim-json"]
 	path = home/.vim/bundle/vim-json
-	url = git@github.com:elzr/vim-json.git
+	url = https://github.com/elzr/vim-json.git
 [submodule "home/.vim/bundle/vim-python-pep8-indent"]
 	path = home/.vim/bundle/vim-python-pep8-indent
 	url = https://github.com/Vimjas/vim-python-pep8-indent.git
