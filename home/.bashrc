@@ -251,3 +251,6 @@ alias docker-aws='eval $(aws ecr get-login)'
 alias tb="nc termbin.com 9999"
 
 alias do_sum="paste -sd+ - | bc"
+
+# Might want this for pyenv
+# eval "$(pyenv init -)"

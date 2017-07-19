@@ -55,7 +55,7 @@ if version >= 703
 endif
 
 " Add breakpoints
-map <Leader>b :set paste<CR>Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>:set nopaste<CR>
+map <Leader>b :set paste<CR>Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>:set nopaste<CR>==
 map <Leader>d :set paste<CR>O<pre> {% filter force_escape %} {% debug %} {% endfilter %}</pre>{# FIXME: DEBUG #}<C-c>:set nopaste<CR>
 
 
@@ -131,6 +131,8 @@ set wildignore+=*/node_modules/*
 let g:jedi#usages_command = "<leader>a"
 " Don't pop docstring window on completion (only on <S-k>)
 autocmd FileType python setlocal completeopt-=preview
+" Why do I have to do this ?!?!
+autocmd FileType python so ~/.vim/bundle/vim-python-pep8-indent/indent/python.vim
 
 " Folding colors (don't know why default is whack)
 :highlight Folded guibg=grey guifg=blue ctermbg=233
