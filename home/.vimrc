@@ -124,6 +124,8 @@ set wildignore+=*/site[-_]media/*
 set wildignore+=*/migrations/*
 " node_modules are annoying too
 set wildignore+=*/node_modules/*
+" other venvs
+set wildignore+=*/*_env/*
 
 " jedi settings
 " If you have errors about jedi at startup: pip install jedi

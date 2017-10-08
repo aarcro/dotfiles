@@ -163,7 +163,7 @@ function type_find ()
 {
     TYPE=$1
     shift
-    find . -path "./.*" -prune -o -path "*node_modules" -prune -o -name \*$TYPE -type f -exec grep -H "$@" {} \;
+    find . -path "./.*" -prune -o -path "*_env" -prune -o -path "*node_modules" -prune -o -name \*$TYPE -type f -exec grep -H "$@" {} \;
     unset TYPE
 }
 
