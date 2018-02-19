@@ -100,6 +100,10 @@ alias gl="git log --decorate --graph"
 alias gp="git pull --ff-only"
 alias gs="git status"
 
+# Always post private and copy to clip board
+alias gist="gist -pc"
+
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     eval "`dircolors -b ~/.dir_colors`"
@@ -254,3 +258,14 @@ alias do_sum="paste -sd+ - | bc"
 
 # Might want this for pyenv
 # eval "$(pyenv init -)"
+
+# django on docker enterypoint
+function manage ()
+{
+    if [ -f docker-compose.yml ] ; then
+        docker-compose run --rm web "$@"
+    else
+        echo "Only use this in a directory with a docker-compose.yml file"
+    fi
+}
+

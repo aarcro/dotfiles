@@ -90,6 +90,9 @@ set showtabline=2
 :% s/’/\&rsquo;/g
 :endfunction
 
+" Toggle big scrolloff (keep cursor in the middle)
+:nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
+
 " toggle spelling use ,p
 " Not in insert!!!
 " imap <Leader>p <C-o>:setlocal spell!<CR>
@@ -224,3 +227,5 @@ let g:yankring_replace_n_nkey = '<C-b>'
 
 " vim-terraform
 let g:terraform_fmt_on_save = 1
+
+" http://vim.wikia.com/wiki/Keep_your_cursor_centered_vertically_on_the_screen
