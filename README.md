@@ -6,4 +6,4 @@ My Dot Files
     source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 
 ## vim Submodules:
-    git submodule add git://github.com/4Evergreen4/vim-hardy.git home/.vim/bundle
+    git submodule add https://github.com/fisadev/vim-isort.git home/.vim/bundle/vim-isort

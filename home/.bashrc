@@ -120,6 +120,12 @@ else
     export LSCOLORS=gxFxCxDxBxegedabagacad
 fi
 
+# Newer Mac
+if [ -x /usr/local/opt/coreutils/libexec/gnubin/dircolors ]; then
+    eval "`dircolors -b ~/.dir_colors`"
+    alias ls='ls --color=auto'
+fi
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).

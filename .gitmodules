@@ -37,3 +37,6 @@
 [submodule "home/.vim/bundle/vim-python-pep8-indent"]
 	path = home/.vim/bundle/vim-python-pep8-indent
 	url = https://github.com/Vimjas/vim-python-pep8-indent.git
+[submodule "home/.vim/bundle/vim-isort"]
+	path = home/.vim/bundle/vim-isort
+	url = https://github.com/fisadev/vim-isort.git
