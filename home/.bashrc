@@ -169,6 +169,12 @@ export PATH=~/bin:${PATH}:/usr/sbin:/sbin
 #For some reason using screen requires this
 alias vi=vim
 
+function random_value ()
+{
+# Fix tr for OSX
+LC_CTYPE=C tr -dc '[:alnum:]' < /dev/urandom | fold -w ${1:-32} | head -n 1
+}
+
 function type_find ()
 {
     TYPE=$1
@@ -256,6 +262,7 @@ alias back='cd ${ACM_BACK_DIR}'
 alias mark='ACM_BACK_DIR=`pwd`'
 alias docker-on='eval $(docker-machine env default)'
 alias docker-aws='eval $(aws ecr get-login)'
+alias fix-docker-clock='docker run --rm --privileged alpine hwclock -s'
 
 # Termbin!
 alias tb="nc termbin.com 9999"
