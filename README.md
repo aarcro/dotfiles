@@ -7,6 +7,3 @@ My Dot Files
 
 ## vim Submodules:
     git submodule add https://github.com/fisadev/vim-isort.git home/.vim/bundle/vim-isort
-
-
-Checking out squashing More!
