@@ -282,3 +282,12 @@ function manage ()
     fi
 }
 
+function unzip_all ()
+{
+    find . -name '*.zip' -execdir unzip -u '{}' ';'
+}
+
+alias s3_services='aws s3 sync s3://mytime-merchant-data-ingestion-qa/petco-services /Users/aarmcm/tmp/s3/mytime-merchant-data-ingestion-qa/petco-services'
+
+alias isort='pipenv run isort -rc --atomic .'
+alias yapf='yapf -ir .'

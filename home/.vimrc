@@ -63,6 +63,7 @@ map <Leader>d :set paste<CR>O<pre> {% filter force_escape %} {% debug %} {% endf
 au BufRead,BufNewFile *.html,*.js setlocal ts=2 sw=2
 au BufRead,BufNewFile *.wsgi set filetype=python
 au BufRead,BufNewFile psql.edit.* set filetype=sql
+au BufRead,BufNewFile *.jst set filetype=javascript
 
 " Making it so ; works like : for commands. Saves typing and eliminates :W style typos due to lazy holding shift.
 nnoremap ; :
@@ -199,8 +200,31 @@ function! s:RunShellCommand(cmdline,...)
   1
 endfunction
 
+" https://vi.stackexchange.com/q/4575/8338
+function! Interleave()
+    " retrieve last selected area position and size
+    let start = line(".")
+    execute "normal! gvo\<esc>"
+    let end = line(".")
+    let [start, end] = sort([start, end], "n")
+    let size = (end - start + 1) / 2
+    " and interleave!
+    for i in range(size - 1)
+        execute (start + size + i). 'm' .(start + 2 * i)
+    endfor
+endfunction
+
+" Select your two contiguous, same-sized blocks, and use it to Interleave ;)
+" from start of second block vip ,it
+vnoremap <Leader>it <esc>:call Interleave()<CR>
+
+
 command! -complete=file -nargs=* Git call s:RunShellCommand('git '.<q-args>)
 command! -complete=file -nargs=* Gdif call s:RunShellCommand('git diff '.<q-args>, 'diff')
+
+" SS - Super Serch - like /, but escapes everything
+" http://vim.wikia.com/wiki/Searching_for_expressions_which_include_slashes
+command! -nargs=1 SS let @/ = '\V'.escape(<q-args>, '/\')|normal! /<C-R>/<CR>
 
 " Khuno
 nnoremap <silent><leader>k :Khuno show<CR>
