@@ -31,7 +31,7 @@ def findchances(logpath):
 
 def main():
     with ProcessPoolExecutor(max_workers=8) as ex:
-        log_paths = glob.glob(str(pathlib.Path.home()) + '/.chia/mainnet/log/*')
+        log_paths = glob.glob(str(pathlib.Path.home()) + '/.chia/mainnet/log/debug*')
         # result_dicts = [findchances(log_paths[0])]
         result_dicts = ex.map(findchances, log_paths)
         # I'm lazy, python shouldn't be
