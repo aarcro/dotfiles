@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+
+import glob, pathlib, re
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+from statistics import mean
+
+r = re.compile(r'^.*(\d+) plots were eligible.*Time: (\d+\.\d+) s.*$')
+
+def findchances(logpath):
+    with open(logpath, 'r') as f:    
+        matches = (r.match(line) for line in f)
+
+        chances, times = zip(*[(int(m.groups()[0]), float(m.groups()[1])) for m in matches if m])
+        chances = sum(chances)
+        try:
+            avg_time = mean(times)
+        except:
+            avg_time = -1
+        try:
+            max_time = max(times)
+        except:
+            max_time = -1 
+        over_30_count = len(list(True for t in times if t > 30))
+    return dict(
+        chances=chances,
+        avg_time=avg_time,
+        max_time=max_time,
+        over_30_count=over_30_count,
+    )
+
+
+def main():
+    with ProcessPoolExecutor(max_workers=8) as ex:
+        log_paths = glob.glob(str(pathlib.Path.home()) + '/.chia/mainnet/log/*')
+        # result_dicts = [findchances(log_paths[0])]
+        result_dicts = ex.map(findchances, log_paths)
+        # I'm lazy, python shouldn't be
+        result_dicts = list(result_dicts)
+
+        chances = sum(d['chances'] for d in result_dicts)
+        try:
+            avg_time= mean(d['avg_time'] for d in result_dicts if d['avg_time'] > 0)
+        except:
+            avg_time = -1
+        try:
+            max_time = max(d['max_time'] for d in result_dicts)
+        except:
+            max_time = 0
+        over_30_count = sum(d['over_30_count'] for d in result_dicts)
+        print(f"{chances} chances to win in your logs.")
+        print(f"{avg_time:.4f} Average time to check.")
+        print(f"{max_time} Max time to check.")
+        if over_30_count:
+            print(f"{over_30_count} Count over 30s (NB: These are bad, fix it).")
+
+        if chances == 0:
+            print("Make sure your log level is set to INFO or higher")
+
+if __name__ == "__main__":
+    main()

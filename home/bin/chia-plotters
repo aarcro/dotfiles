@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for f in `find ~/.chia/mainnet/plotter/ -newer ~/.chia/mainnet/plotter/` ; do
+	grep -i "starting phase" $f | tail -n1
+done
