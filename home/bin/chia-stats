@@ -4,14 +4,22 @@ import glob, pathlib, re
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from statistics import mean
 
-r = re.compile(r'^.*(\d+) plots were eligible.*Time: (\d+\.\d+) s.*$')
+r = re.compile(r'^.*(\d+) plots were eligible.* Found (\d+) proofs.* Time: (\d+\.\d+) s.*$')
 
 def findchances(logpath):
     with open(logpath, 'r') as f:    
         matches = (r.match(line) for line in f)
 
-        chances, times = zip(*[(int(m.groups()[0]), float(m.groups()[1])) for m in matches if m])
+        chances, proofs, times = zip(*[
+            (
+                int(m.groups()[0]),
+                int(m.groups()[1]),
+                float(m.groups()[2])
+            )
+            for m in matches if m
+        ])
         chances = sum(chances)
+        proofs = sum(proofs)
         try:
             avg_time = mean(times)
         except:
@@ -23,6 +31,7 @@ def findchances(logpath):
         over_30_count = len(list(True for t in times if t > 30))
     return dict(
         chances=chances,
+        proofs=proofs,
         avg_time=avg_time,
         max_time=max_time,
         over_30_count=over_30_count,
@@ -38,6 +47,7 @@ def main():
         result_dicts = list(result_dicts)
 
         chances = sum(d['chances'] for d in result_dicts)
+        proofs = sum(d['proofs'] for d in result_dicts)
         try:
             avg_time= mean(d['avg_time'] for d in result_dicts if d['avg_time'] > 0)
         except:
@@ -48,6 +58,7 @@ def main():
             max_time = 0
         over_30_count = sum(d['over_30_count'] for d in result_dicts)
         print(f"{chances} chances to win in your logs.")
+        print(f"{proofs} proofs found (these are wins, right?).")
         print(f"{avg_time:.4f} Average time to check.")
         print(f"{max_time} Max time to check.")
         if over_30_count:
