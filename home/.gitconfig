@@ -10,6 +10,8 @@
     pr = pull --rebase
     lc = log ORIG_HEAD.. --stat --no-merges
     st = status
+	unpushed = log --branches --not --remotes --simplify-by-decoration --decorate --oneline --graph
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [core]
 	pager = less -FRXS
 [merge]

@@ -50,7 +50,7 @@ set showmode
 
 " Highlight column 80 and 110
 if version >= 703
-    set colorcolumn=80,110
+    set colorcolumn=80,110,120
     highlight ColorColumn ctermbg=233
 endif
 
@@ -228,7 +228,7 @@ command! -nargs=1 SS let @/ = '\V'.escape(<q-args>, '/\')|normal! /<C-R>/<CR>
 
 " Khuno
 nnoremap <silent><leader>k :Khuno show<CR>
-let g:khuno_max_line_length=110
+let g:khuno_max_line_length=120
 
 " hardy - arduino
 let g:hardy_arduino_path = '/Applications/Arduino.app/Contents/MacOS/Arduino'

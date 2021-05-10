@@ -270,7 +270,7 @@ alias tb="nc termbin.com 9999"
 alias do_sum="paste -sd+ - | bc"
 
 # Might want this for pyenv
-# eval "$(pyenv init -)"
+eval "$(pyenv init -)"
 
 # django on docker enterypoint
 function manage ()
@@ -290,6 +290,28 @@ function unzip_all ()
 alias s3_services='aws s3 sync s3://mytime-merchant-data-ingestion-qa/petco-services /Users/aarmcm/tmp/s3/mytime-merchant-data-ingestion-qa/petco-services'
 
 alias isort='pipenv run isort -rc --atomic .'
+alias lock='time docker-compose -f docker-compose.tools.yml run --rm lock'
+alias pbjson='pbpaste | json_pp | pbcopy'
+alias rehash="hash -r"
+alias settz="sudo systemsetup -settimezone $@"
 alias yapf='yapf -ir .'
 
+if [ -f /usr/local/opt/autoenv/activate.sh ]; then
+    # AUTOENV_AUTH_FILE: Authorized env files, defaults to ~/.autoenv_authorized
+    # AUTOENV_ENV_FILENAME: Name of the .env file, defaults to .env
+    # AUTOENV_LOWER_FIRST: Set this variable to flip the order of .env files executed
+    # AUTOENV_ENV_LEAVE_FILENAME: Name of the .env.leave file, defaults to .env.leave
+    # AUTOENV_ENABLE_LEAVE: Set this to a non-null string in order to enable source env when leaving
+    # AUTOENV_ASSUME_YES: Set this variable to silently authorize the initialization of new environments
+
+    AUTOENV_ENV_FILENAME=.env.auto
+    AUTOENV_ENV_LEAVE_FILENAME=.env.leave
+    AUTOENV_ENABLE_LEAVE=yes
+
+    source /usr/local/opt/autoenv/activate.sh
+else
+    echo "autoenv not found"
+fi
+
 alias chia-disks="df -h / /mnt/chia_tmp /mnt/chia_plots/*"
+
