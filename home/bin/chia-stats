@@ -4,7 +4,8 @@ import glob, pathlib, re
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from statistics import mean
 
-r = re.compile(r'^.*(\d+) plots were eligible.* Found (\d+) proofs.* Time: (\d+\.\d+) s.*$')
+#r = re.compile(r'^.*(\d+) plots were eligible.* Found (\d+) proofs.* Time: (\d+\.\d+) s.*$')
+r = re.compile(r'^.*([1-9]+) plots were eligible.* Found (\d+) proofs.* Time: (\d+\.\d+) s.*$')
 
 def findchances(logpath):
     with open(logpath, 'r') as f:    
