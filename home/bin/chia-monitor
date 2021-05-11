@@ -1,0 +1,7 @@
+#!/bin/bash
+
+nohup chia-dashboard-satellite > ~/chia-dashboard-satellite.log 2>&1 &
+echo $! > ~/.chia-dashboard-satellite.pid
+
+# tail -f ~/.chia/mainnet/log/debug.log | /home/aarmcm/src/chia-blockchain/venv/bin/python ~/chiamon/chia-exporter.py &
+# echo $! > ~/.chiamon.pid
