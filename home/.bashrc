@@ -313,5 +313,5 @@ else
     echo "autoenv not found"
 fi
 
-alias chia-disks="df -h / /mnt/chia_tmp /mnt/chia_plots/*"
+alias chia-disks="df -h | grep -v -e loop -e tmpfs"
 

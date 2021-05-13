@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Requires ~/.aws/credentials populated for [default]
+sudo goofys -o allow_other --endpoint https://s3.wasabisys.com --region us-east-1 --uid 1000 --gid 1000 luckiplots /g-plots/
