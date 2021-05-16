@@ -270,7 +270,9 @@ alias tb="nc termbin.com 9999"
 alias do_sum="paste -sd+ - | bc"
 
 # Might want this for pyenv
-eval "$(pyenv init -)"
+if [ $(which pyenv 2> /dev/null) ] ; then
+    eval "$(pyenv init -)"
+fi
 
 # django on docker enterypoint
 function manage ()
@@ -314,4 +316,3 @@ else
 fi
 
 alias chia-disks="df -h | grep -v -e loop -e tmpfs"
-
