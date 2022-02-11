@@ -100,6 +100,10 @@ alias gl="git log --decorate --graph"
 alias gp="git pull --ff-only"
 alias gs="git status"
 
+alias pbjson='pbpaste | json_pp | pbcopy'
+alias pbpull='ssh ets pbpaste | pbcopy'
+alias pbpush='pbpaste  | ssh ets pbcopy'
+
 # Always post private and copy to clip board
 alias gist="gist -pc"
 
@@ -210,6 +214,14 @@ else
     export WORKON_HOME=~/virtual_envs
 fi
 
+# NVM stuff
+if [ -f /usr/local/opt/nvm/nvm.sh ] ; then
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+	[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+fi
+
+
 #Lazy breaks tab completion for workon :(
 #if [ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]; then
 #    source /usr/local/bin/virtualenvwrapper_lazy.sh
@@ -293,7 +305,6 @@ alias s3_services='aws s3 sync s3://mytime-merchant-data-ingestion-qa/petco-serv
 
 alias isort='pipenv run isort -rc --atomic .'
 alias lock='time docker-compose -f docker-compose.tools.yml run --rm lock'
-alias pbjson='pbpaste | json_pp | pbcopy'
 alias rehash="hash -r"
 alias settz="sudo systemsetup -settimezone $@"
 alias yapf='yapf -ir .'
