@@ -16,6 +16,17 @@ if [ $(which brew 2> /dev/null) ] ; then
     export PATH=${BREW_PATH}/opt/coreutils/libexec/gnubin:${BREW_PATH}/sbin:${PATH}
 fi
 
+# ARM Mac
+if [ -d /opt/homebrew/ ] ; then
+    export HOMEBREW_PREFIX="/opt/homebrew";
+    export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+    export HOMEBREW_REPOSITORY="/opt/homebrew";
+    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+    export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+    BREW_PATH=`brew --prefix`
+fi
+
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
@@ -150,6 +161,9 @@ if [ -n "$BREW_PATH" ]; then
   fi
 fi
 
+# ARM Mac (with homebrew)
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+
 . ~/bin/django_bash_completion
 . ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
 
@@ -221,6 +235,13 @@ if [ -f /usr/local/opt/nvm/nvm.sh ] ; then
 	[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 fi
 
+
+# NVM, but ARM mac
+if [ -f /opt/homebrew/opt/nvm/nvm.sh ] ; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+fi
 
 #Lazy breaks tab completion for workon :(
 #if [ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]; then
@@ -309,7 +330,7 @@ alias rehash="hash -r"
 alias settz="sudo systemsetup -settimezone $@"
 alias yapf='yapf -ir .'
 
-if [ -f /usr/local/opt/autoenv/activate.sh ]; then
+if [ -f ${BREW_PATH}/opt/autoenv/activate.sh ]; then
     # AUTOENV_AUTH_FILE: Authorized env files, defaults to ~/.autoenv_authorized
     # AUTOENV_ENV_FILENAME: Name of the .env file, defaults to .env
     # AUTOENV_LOWER_FIRST: Set this variable to flip the order of .env files executed
@@ -321,7 +342,7 @@ if [ -f /usr/local/opt/autoenv/activate.sh ]; then
     AUTOENV_ENV_LEAVE_FILENAME=.env.leave
     AUTOENV_ENABLE_LEAVE=yes
 
-    source /usr/local/opt/autoenv/activate.sh
+    source ${BREW_PATH}/opt/autoenv/activate.sh
 else
     echo "autoenv not found"
 fi

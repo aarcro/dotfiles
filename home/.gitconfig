@@ -8,6 +8,7 @@
 [alias]
     dif = diff
     pr = pull --rebase
+    fu = push --force-with-lease -u
     lc = log ORIG_HEAD.. --stat --no-merges
     st = status
 	unpushed = log --branches --not --remotes --simplify-by-decoration --decorate --oneline --graph
@@ -16,3 +17,7 @@
 	pager = less -FRXS
 [merge]
 	tool = vimdiff
+[init]
+	defaultBranch = main
+[rerere]
+	enabled = true
