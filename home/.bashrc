@@ -324,7 +324,7 @@ function unzip_all ()
 
 alias s3_services='aws s3 sync s3://mytime-merchant-data-ingestion-qa/petco-services /Users/aarmcm/tmp/s3/mytime-merchant-data-ingestion-qa/petco-services'
 
-alias isort='pipenv run isort -rc --atomic .'
+# alias isort='pipenv run isort -rc --atomic .'
 alias lock='time docker-compose -f docker-compose.tools.yml run --rm lock'
 alias rehash="hash -r"
 alias settz="sudo systemsetup -settimezone $@"
@@ -348,3 +348,9 @@ else
 fi
 
 alias chia-disks="df -h | grep -v -e loop -e tmpfs"
+
+# Run one time to update a repo to use the petco key
+alias petco-git="git config core.sshCommand 'ssh -i ~/.ssh/id_petco_gitlab -o IdentitiesOnly=yes -F /dev/null'"
+# Run to clone petco repos
+alias petco-clone="GIT_SSH_COMMAND='ssh -i /Users/aarmcm/.ssh/id_petco_gitlab -o IdentitiesOnly=yes' git clone"
+export PATH="$PATH:$HOME/dev/carta-toolbox/scripts"

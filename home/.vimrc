@@ -20,7 +20,7 @@ vnoremap <Leader><Leader> <esc>
 inoremap <Leader><Leader><Leader> ,<esc>
 
 " If you're having trouble with colors:
-" set t_Co=256
+set t_Co=256
 colors desert256
 set ts=4
 set sw=4
@@ -44,7 +44,8 @@ set smartcase
 nnoremap cc ct
 
 nnoremap <C-p> :set invpaste paste?<CR>
-inoremap <C-p> <esc>:set invpaste paste?<CR>a
+" Not in insert without super tab
+" inoremap <C-p> <esc>:set invpaste paste?<CR>a
 set pastetoggle=<C-p>
 set showmode
 
@@ -130,6 +131,7 @@ set wildignore+=*/migrations/*
 set wildignore+=*/node_modules/*
 " other venvs
 set wildignore+=*/*_env/*
+set wildignore+=*/*venv/*
 
 " jedi settings
 " If you have errors about jedi at startup: pip install jedi
