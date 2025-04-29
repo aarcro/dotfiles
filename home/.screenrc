@@ -29,10 +29,15 @@ attrcolor b ".I"
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E38;5;%dm'
 defbce "on"
 
-term screen-256color
+term xterm-256color
 
 # Allow some local stuff
 source .screenrc_local
 # maybe like this:
 #bind r eval 'exec touch /opt/virtual_envs/$PROJECT/$REPO/server_configs/$HOST/portal.wsgi' 'echo "WSGI Reloaded"'
 #bind g eval 'exec /opt/virtual_envs/$PROJECT/bin/bounce-gunicorn' 'echo "Gunicorn Reloaded"'
+
+
+# https://superuser.com/questions/790903/how-can-i-cause-vim-to-copy-text-to-gnu-screens-clipboard-buffer
+setenv BUFFERFILE "$HOME/.buffer" 
+bufferfile "$BUFFERFILE"

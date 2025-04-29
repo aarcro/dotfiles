@@ -49,3 +49,6 @@
 [submodule "home/.vim/bundle/robotframework-vim"]
 	path = home/.vim/bundle/robotframework-vim
 	url = https://github.com/mfukar/robotframework-vim.git
+[submodule "home/.vim/bundle/typescript-vim"]
+	path = home/.vim/bundle/typescript-vim
+	url = https://github.com/leafgarland/typescript-vim.git

@@ -14,10 +14,13 @@ nmap <Leader>t :% s/\s\+$//<CR>,/''
 nmap <Leader>cs :Coveragepy show<CR>
 nmap <Leader>cr :Coveragepy report<CR>
 
-" Take that TouchBar!
-inoremap <Leader><Leader> <esc>
-vnoremap <Leader><Leader> <esc>
-inoremap <Leader><Leader><Leader> ,<esc>
+" Take that TouchBar! - which I don't have or need now...
+"inoremap <Leader><Leader> <esc>
+"vnoremap <Leader><Leader> <esc>
+"inoremap <Leader><Leader><Leader> ,<esc>
+
+" Pyenv python - or not...
+" :let g:python3_host_prog='/Users/amcmillin/.pyenv/versions/3.10.13/bin/python'
 
 " If you're having trouble with colors:
 " set t_Co=256
@@ -57,13 +60,20 @@ endif
 " Add breakpoints
 map <Leader>b :set paste<CR>Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>:set nopaste<CR>==
 map <Leader>d :set paste<CR>O<pre> {% filter force_escape %} {% debug %} {% endfilter %}</pre>{# FIXME: DEBUG #}<C-c>:set nopaste<CR>
+map <Leader>l :set paste<CR>O/* eslint-disable */<CR>console.log((template as any).template.Resources);<CR>/* eslint-enable */<CR><C-c>:set nopaste<CR>
 
 
-" Smaller tabs in html/js files
-au BufRead,BufNewFile *.html,*.js setlocal ts=2 sw=2
+" Smaller tabs in html/js/ts files
+au BufRead,BufNewFile *.md,*.yml,*.yaml,*.html,*.js,*.ts setlocal ts=2 sw=2
 au BufRead,BufNewFile *.wsgi set filetype=python
 au BufRead,BufNewFile psql.edit.* set filetype=sql
 au BufRead,BufNewFile *.jst set filetype=javascript
+
+" text width in markdown
+au BufRead,BufNewFile *.md setlocal tw=81
+
+" re-wrap text
+nnoremap <Leader>w gqip
 
 " Making it so ; works like : for commands. Saves typing and eliminates :W style typos due to lazy holding shift.
 nnoremap ; :
@@ -134,7 +144,7 @@ set wildignore+=*/*_env/*
 " jedi settings
 " If you have errors about jedi at startup: pip install jedi
 " leader-n is new a ctrlp tab, lets use leader-a for all usages
-let g:jedi#usages_command = "<leader>a"
+" let g:jedi#usages_command = "<leader>a"
 " Don't pop docstring window on completion (only on <S-k>)
 autocmd FileType python setlocal completeopt-=preview
 " Why do I have to do this ?!?!
@@ -253,3 +263,10 @@ let g:yankring_replace_n_nkey = '<C-b>'
 let g:terraform_fmt_on_save = 1
 
 " http://vim.wikia.com/wiki/Keep_your_cursor_centered_vertically_on_the_screen
+
+" https://superuser.com/questions/790903/how-can-i-cause-vim-to-copy-text-to-gnu-screens-clipboard-buffer
+if exists("$BUFFERFILE")
+    nnoremap <silent><leader>< :let @" = join(readfile($BUFFERFILE), "\n")<CR>
+    nnoremap <silent><leader>> :call writefile( split(@", "\n"), $BUFFERFILE )<CR>
+endif
+

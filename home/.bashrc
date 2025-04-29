@@ -98,7 +98,7 @@ alias gc="git commit -a"
 alias gd="git diff"
 alias gl="git log --decorate --graph"
 alias gp="git pull --ff-only"
-alias gs="git status"
+alias gs="git -c color.status=always status"
 
 alias pbjson='pbpaste | json_pp | pbcopy'
 alias pbpull='ssh ets pbpaste | pbcopy'
@@ -149,6 +149,9 @@ if [ -n "$BREW_PATH" ]; then
     echo "Extended Complete enabled"
   fi
 fi
+
+# OR Mac with bash >=4 brew install bash-completion@2
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 . ~/bin/django_bash_completion
 . ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
@@ -219,6 +222,8 @@ if [ -f /usr/local/opt/nvm/nvm.sh ] ; then
 	export NVM_DIR="$HOME/.nvm"
 	[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 	[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+    # What a stupid default if it isn't used by default?!?!
+    nvm use default
 fi
 
 
