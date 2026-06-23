@@ -15,6 +15,9 @@ startup_message off
 #^ot to title
 bind t title
 
+# ^oy to yank the highlight region to pasteboard
+bind y eval "writebuf" "exec sh -c 'cat /tmp/screen-exchange | pbcopy'"
+
 # set up default screens
 screen bash -l
 title "sys"

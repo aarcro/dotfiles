@@ -110,6 +110,7 @@ alias gd="git diff"
 alias gl="git log --decorate --graph"
 alias gp="git pull --ff-only"
 alias gs="git status"
+alias oops="gc --amend --no-edit && git fu"
 
 alias pbjson='pbpaste | json_pp | pbcopy'
 alias pbpull='ssh ets pbpaste | pbcopy'
@@ -182,7 +183,7 @@ case $( uname -s ) in
 		;;
 esac
 
-export PATH=~/bin:${PATH}:/usr/sbin:/sbin
+export PATH=~/bin:~/.local/bin:${PATH}:/usr/sbin:/sbin
 
 #For some reason using screen requires this
 alias vi=vim
@@ -242,6 +243,26 @@ if [ -f /opt/homebrew/opt/nvm/nvm.sh ] ; then
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 fi
+
+# Check for fzf (after homebrew setup)
+if [ $(which fzf 2> /dev/null) ] ; then
+    echo "fzf on"
+    eval "$(fzf --bash)"
+    #--preview 'git branch | fzf --filter={q} | ~/bin/_fzf_lcp.sh {q}' \
+    function gco() {
+      git branch | fzf \
+        --query="$1" \
+        --preview 'git show --color=always {-1}' \
+        --height 40% \
+        --layout reverse \
+        --bind 'ctrl-k:kill-line' \
+        --bind 'enter:become([ -n "{-1}" ] && git checkout {-1} || git co {q})' \
+        --bind 'tab:transform-query(git branch | fzf --filter={q} | ~/bin/_fzf_lcp.sh {q})'
+    }
+else
+    alias gco="git co"
+fi
+
 
 #Lazy breaks tab completion for workon :(
 #if [ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]; then
@@ -354,3 +375,7 @@ alias petco-git="git config core.sshCommand 'ssh -i ~/.ssh/id_petco_gitlab -o Id
 # Run to clone petco repos
 alias petco-clone="GIT_SSH_COMMAND='ssh -i /Users/aarmcm/.ssh/id_petco_gitlab -o IdentitiesOnly=yes' git clone"
 export PATH="$PATH:$HOME/dev/carta-toolbox/scripts"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/aarmcm/.lmstudio/bin"
+# End of LM Studio CLI section

@@ -13,6 +13,7 @@
     st = status
 	unpushed = log --branches --not --remotes --simplify-by-decoration --decorate --oneline --graph
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	co = "!f() { git show-ref --verify --quiet refs/heads/\"$1\" && git checkout \"$1\" || git checkout -b \"$1\"; }; f"
 [core]
 	pager = less -FRXS
 [merge]
