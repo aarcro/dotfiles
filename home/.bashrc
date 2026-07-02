@@ -379,3 +379,8 @@ export PATH="$PATH:$HOME/dev/carta-toolbox/scripts"
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/aarmcm/.lmstudio/bin"
 # End of LM Studio CLI section
+
+# If this is a UV shell, mark the prompt
+if [[ -n "$UV_ENV" ]]; then
+  PS1="(uv) $PS1"
+fi
