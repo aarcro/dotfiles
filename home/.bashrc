@@ -1,7 +1,7 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-umask 0027
+umask 0077
 
 # If you want the cmd-tab switcher to display on all screens
 # defaults write com.apple.dock appswitcher-all-displays -bool true
