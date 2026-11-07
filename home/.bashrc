@@ -563,6 +563,39 @@ else
     alias gco="git co"
 fi
 
+# gwt: pick a git worktree with fzf and cd into it. Same style as gco
+# cd must run in this shell, so fzf prints the path and does not use become().
+if command -v fzf >/dev/null 2>&1; then
+    function gwt() {
+        local dir
+        dir=$(git worktree list | fzf \
+            --query="$1" \
+            --select-1 \
+            --preview 'git -C {1} log --color=always --oneline --decorate -n 30; echo; git -C {1} status --short' \
+            --height 40% \
+            --layout reverse \
+            --bind 'ctrl-k:kill-line' \
+            --bind 'tab:transform-query(git worktree list | fzf --filter={q} | awk "{print \$1}" | ~/bin/_fzf_lcp.sh {q})' \
+            | awk '{print $1}')
+        [ -n "$dir" ] && cd "$dir" || return
+        [ -n "$STY" ] && _gwt_title
+    }
+
+    # Set the screen window title to "<PR number> <ticket>", e.g. "93 ENG-5860".
+    # The ticket comes from the branch name, else from the PR title. Nothing found: keep the title.
+    function _gwt_title() {
+        local branch pr title ticket text
+        local re='(^|[^A-Za-z])([A-Za-z]{2,5}-[0-9]+)([^A-Za-z0-9]|$)'
+        branch=$(git branch --show-current 2>/dev/null)
+        IFS=$'\t' read -r pr title < <(gh pr view --json number,title -q '"\(.number)\t\(.title)"' 2>/dev/null)
+        if [[ $branch =~ $re ]] || [[ $title =~ $re ]]; then
+            ticket=$(tr a-z A-Z <<<"${BASH_REMATCH[2]}")
+        fi
+        text="$pr${pr:+${ticket:+ }}$ticket"
+        [ -n "$text" ] && printf '\ek%s\e\\' "$text"
+    }
+fi
+
 if [ -f ${BREW_PATH}/opt/autoenv/activate.sh ]; then
     # remove the OMB alias - slowly removeing all OMG features
     unalias cd 2>/dev/null
