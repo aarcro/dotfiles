@@ -11,16 +11,40 @@ umask 0077
 
 #TERM=screen
 
-# If not running interactively, don't do anything
-[ -z "$PS1" ] && return
-
-export VISUAL=vim
-
 # Check for brew
 if [ $(which brew 2> /dev/null) ] ; then
     BREW_PATH=`brew --prefix`
     export PATH=${BREW_PATH}/opt/coreutils/libexec/gnubin:${BREW_PATH}/sbin:${PATH}
 fi
+
+if [ -f ${BREW_PATH}/opt/autoenv/activate.sh ]; then
+    # remove the OMB alias - slowly removeing all OMG features
+    unalias cd 2>/dev/null
+
+    # AUTOENV_AUTH_FILE: Authorized env files, defaults to ~/.autoenv_authorized
+    # AUTOENV_ENV_FILENAME: Name of the .env file, defaults to .env
+    # AUTOENV_LOWER_FIRST: Set this variable to flip the order of .env files executed
+    # AUTOENV_ENV_LEAVE_FILENAME: Name of the .env.leave file, defaults to .env.leave
+    # AUTOENV_ENABLE_LEAVE: Set this to a non-null string in order to enable source env when leaving
+    # AUTOENV_ASSUME_YES: Set this variable to silently authorize the initialization of new environments
+
+    AUTOENV_ENV_FILENAME=.env.auto
+    AUTOENV_ENV_LEAVE_FILENAME=.env.leave
+    AUTOENV_ENABLE_LEAVE=yes
+
+    source ${BREW_PATH}/opt/autoenv/activate.sh
+fi
+
+# If not running interactively, don't do anything else
+[ -z "$PS1" ] && return
+
+if [ -f ${BREW_PATH}/opt/autoenv/activate.sh ]; then
+    echo "autoenv configure"
+else
+    echo "autoenv not found"
+fi
+
+export VISUAL=vim
 
 # ARM Mac
 if [ -d /opt/homebrew/ ] ; then
@@ -195,6 +219,19 @@ function f() {
     local context="${2:-20}"
 
     ag "def $1" -A "$context"
+}
+
+function c() {
+    # Ensure at least a search term is provided
+    if [ -z "$1" ]; then
+        echo "Usage: f <search_string> [context_lines]"
+        return 1
+    fi
+
+    # Set default to 20 if the second argument is missing or not provided
+    local context="${2:-20}"
+
+    ag "class.*$1" -A "$context"
 }
 
 #Virtenv wrapper
@@ -594,27 +631,6 @@ if command -v fzf >/dev/null 2>&1; then
         text="$pr${pr:+${ticket:+ }}$ticket"
         [ -n "$text" ] && printf '\ek%s\e\\' "$text"
     }
-fi
-
-if [ -f ${BREW_PATH}/opt/autoenv/activate.sh ]; then
-    # remove the OMB alias - slowly removeing all OMG features
-    unalias cd 2>/dev/null
-
-    # AUTOENV_AUTH_FILE: Authorized env files, defaults to ~/.autoenv_authorized
-    # AUTOENV_ENV_FILENAME: Name of the .env file, defaults to .env
-    # AUTOENV_LOWER_FIRST: Set this variable to flip the order of .env files executed
-    # AUTOENV_ENV_LEAVE_FILENAME: Name of the .env.leave file, defaults to .env.leave
-    # AUTOENV_ENABLE_LEAVE: Set this to a non-null string in order to enable source env when leaving
-    # AUTOENV_ASSUME_YES: Set this variable to silently authorize the initialization of new environments
-
-    AUTOENV_ENV_FILENAME=.env.auto
-    AUTOENV_ENV_LEAVE_FILENAME=.env.leave
-    AUTOENV_ENABLE_LEAVE=yes
-
-    source ${BREW_PATH}/opt/autoenv/activate.sh
-    echo "autoenv configure"
-else
-    echo "autoenv not found"
 fi
 
 # Added by LM Studio CLI (lms)
